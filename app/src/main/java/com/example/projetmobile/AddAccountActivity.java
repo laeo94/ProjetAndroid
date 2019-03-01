@@ -1,5 +1,5 @@
 
-package com.example.georgeclementnayani.shareaccount;
+package com.example.projetmobile;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -100,7 +100,6 @@ public class AddAccountActivity extends AppCompatActivity {
             httpParams.put(KEY_PID,accountPid);
             JSONObject jsonObject = httpJsonParser.makeHttpRequest(
                     BASE_URL + "add_account.php", "POST", httpParams);
-            System.out.println("-------------------------------------------"+success);
             try {
                 success = jsonObject.getInt(KEY_SUCCESS);
             } catch (JSONException e) {

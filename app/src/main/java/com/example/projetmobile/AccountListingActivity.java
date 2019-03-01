@@ -1,4 +1,4 @@
-package com.example.georgeclementnayani.shareaccount;
+package com.example.projetmobile;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -60,7 +60,8 @@ public class AccountListingActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             HttpJsonParser httpJsonParser = new HttpJsonParser();
             JSONObject jsonObject = httpJsonParser.makeHttpRequest(
-                    BASE_URL + "select_all_account.php", "GET", null);
+                    BASE_URL + "select_person_all_account.php", "GET", null);
+            System.out.println(jsonObject+"-------------------------------------------------");
             if (jsonObject == null) {
                 System.out.println("JSON NULL");
             }
@@ -99,9 +100,10 @@ public class AccountListingActivity extends AppCompatActivity {
 
         private void populateAccountList() {
             ListAdapter adapter = new SimpleAdapter(
-                    AccountListingActivity.this, accountList, R.layout.list_item, new String[]{
-                    KEY_ACCOUNT_ID, KEY_TITLE,KEY_PID}, new int[]{R.id.accountId, R.id.accountTitle});
+                    AccountListingActivity.this, accountList, R.layout.list_item2, new String[]{
+                    KEY_ACCOUNT_ID, KEY_TITLE}, new int[]{R.id.accountId, R.id.accountTitle});
             accountListView.setAdapter(adapter);
+
             accountListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

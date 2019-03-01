@@ -1,4 +1,4 @@
-package com.example.georgeclementnayani.shareaccount;
+package com.example.projetmobile;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;

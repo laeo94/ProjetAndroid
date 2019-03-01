@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -25,8 +24,7 @@ public class ChoicePerson extends AppCompatActivity {
     private static final String KEY_SUCCESS = "success";
     private static final String KEY_DATA = "data";
     private static final String KEY_PERSON_ID = "pid";
-    private static final String KEY_LASTNAME ="lastname";
-    private static final String KEY_FIRSTNAME="firstname";
+    private static final String KEY_PSEUDO ="pseudo";
     private static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
     private ArrayList<HashMap<String, String>> personList;
     private ListView personListView;
@@ -38,13 +36,25 @@ public class ChoicePerson extends AppCompatActivity {
         setContentView(R.layout.activity_choice_person);
         personListView = findViewById(R.id.personList);
         nouveau = findViewById(R.id.button);
-        new FetchPersonAsyncTask().execute();
         nouveau.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                System.out.println("Cliker sur new --------------------------------------");
+            public void onClick(View view) {
+                //Check for network connectivity
+                if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
+                    Intent i = new Intent(getApplicationContext(),
+                            AddPersonActivity.class);
+                    startActivity(i);
+                } else {
+                    //Display error message if not connected to internet
+                    Toast.makeText(ChoicePerson.this,
+                            "Unable to connect to internet",
+                            Toast.LENGTH_LONG).show();
+
+                }
+
             }
         });
+        new FetchPersonAsyncTask().execute();
     }
 
     //Fetche the list of person from the server
@@ -65,11 +75,11 @@ public class ChoicePerson extends AppCompatActivity {
                     person= jsonObject.getJSONArray(KEY_DATA);
                     for (int i = 0; i < person.length(); i++) {
                         JSONObject accounts  = person.getJSONObject(i);
-                        String lastname = accounts.getString(KEY_LASTNAME );
-                        String firstname = accounts.getString(KEY_FIRSTNAME );
+                        String pseudo = accounts.getString(KEY_PSEUDO);
+                        String personId = accounts.getString(KEY_PERSON_ID );
                         HashMap<String, String> map = new HashMap<String, String>();
-                        map.put(KEY_LASTNAME , lastname);
-                        map.put(KEY_FIRSTNAME, firstname);
+                        map.put(KEY_PERSON_ID, personId);
+                        map.put(KEY_PSEUDO,pseudo);
                         personList.add(map);
                     }
                 }
@@ -81,19 +91,20 @@ public class ChoicePerson extends AppCompatActivity {
         protected void onPostExecute(String result) {
             runOnUiThread(new Runnable() {
                 public void run() {
-                    populateAccountList();
+                    populatePersonList();
+
                 }
             });
         }
     }
 
     //Updating parsed JSON data into ListView
-    private void populateAccountList() {
+    private void populatePersonList() {
         ListAdapter adapter = new SimpleAdapter(
                 ChoicePerson.this, personList,
-                R.layout.list_item, new String[]{KEY_LASTNAME,
-                KEY_FIRSTNAME },
-                new int[]{R.id.lastname, R.id.firstname});
+                R.layout.list_item, new String[]{KEY_PERSON_ID,
+                KEY_PSEUDO},
+                new int[]{R.id.textView, R.id.textView1});
 
         // updating listview
         personListView.setAdapter(adapter);
@@ -103,12 +114,14 @@ public class ChoicePerson extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //Check for network connectivity
                 if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
-                    String accountId = ((TextView) view.findViewById(R.id.lastname))
+                    String personId = ((TextView) view.findViewById(R.id.textView))
                             .getText().toString();
-                    /*Intent intent = new Intent(getApplicationContext(),
-                            AccountUpdateDeleteActivity.class);
-                    intent.putExtra(KEY_ACCOUNT_ID, accountId);
-                    startActivityForResult(intent, 20);*/
+                    String pseudo= ((TextView) view.findViewById(R.id.textView1))
+                            .getText().toString();
+
+                    Intent intent = new Intent(getApplicationContext(), AccountHomeActivity.class);
+                    intent.putExtra(KEY_PERSON_ID,personId);
+                    startActivityForResult(intent, 20);
 
                 } else {
                     Toast.makeText(ChoicePerson.this,
@@ -120,6 +133,7 @@ public class ChoicePerson extends AppCompatActivity {
 
             }
         });
+
 
     }
 }

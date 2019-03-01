@@ -1,4 +1,4 @@
-package com.example.georgeclementnayani.shareaccount;
+package com.example.projetmobile;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

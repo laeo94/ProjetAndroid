@@ -10,11 +10,45 @@
     android:paddingRight="@dimen/fab_margin"
     android:paddingTop="@dimen/fab_margin"
     tools:context=".AccountListingActivity">
+
     <ListView
         android:id="@+id/accountList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="368dp"
+        android:layout_height="299dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="87dp"
+        android:layout_marginEnd="0dp"
         android:divider="@android:color/transparent"
-        android:dividerHeight="5dp">
-    </ListView>
+        android:dividerHeight="5dp"></ListView>
+
+    <Button
+        android:id="@+id/button2"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="148dp"
+        android:layout_height="53dp"
+        android:layout_below="@+id/accountList"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="220dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="Add"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="271dp"
+        android:layout_height="44dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="28dp"
+        android:text="My Account List :) "
+        android:textSize="18sp"
+        android:textStyle="bold" />
 </RelativeLayout>

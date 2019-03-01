@@ -10,15 +10,20 @@
     android:paddingRight="@dimen/fab_margin"
     android:paddingTop="@dimen/fab_margin"
     tools:context=".AccountHomeActivity">
+
     <Button
         android:id="@+id/viewAllBtn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/view_all" />
+        android:layout_height="75dp"
+        android:background="@color/colorPrimary"
+        android:text="@string/view_all"
+        android:textColor="@android:color/white" />
 
     <Button
         android:id="@+id/addNewBtn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/add_new" />
+        android:layout_height="70dp"
+        android:background="@color/colorAccent"
+        android:text="@string/add_new"
+        android:textColor="@android:color/white" />
 </LinearLayout>

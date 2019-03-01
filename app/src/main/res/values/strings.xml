@@ -10,5 +10,5 @@
     <string name="delete">Delete</string>
     <string name="add">Add</string>
     <string name="title_activity_remote_my_sql">RemoteMySQL</string>
-    <string name="title_activity_updat_remove">AccountUpdateRemove</string>
+    <string name="title_activity_update_remove">AccountUpdateRemove</string>
 </resources>
