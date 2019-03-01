@@ -25,10 +25,12 @@ public class AddAccountActivity extends AppCompatActivity {
     private static final String KEY_PID= "pid";
     private static final String BASE_URL = "https://pw.lacl.fr/~u21402914/ProjetAndroid/";
     private static String STRING_EMPTY = "";
+
     private EditText accountTitleEditText;
     private EditText accountDescEditText;
     private EditText accountDevEditText;
     private EditText accountPidEditText;
+
     private String accountTitle;
     private String accountDesc;
     private String accountDev;

@@ -28,6 +28,7 @@ public class AccountListingActivity extends AppCompatActivity {
     private static final String KEY_TITLE = "title";
     private static final String KEY_DESC = "description";
     private static final String KEY_DEV = "device";
+    private static final String KEY_PID = "pid";
     private static final String BASE_URL = "https://pw.lacl.fr/~u21402914/ProjetAndroid/";
     private ArrayList<HashMap<String, String>> accountList;
     private ListView accountListView;
@@ -99,15 +100,14 @@ public class AccountListingActivity extends AppCompatActivity {
         private void populateAccountList() {
             ListAdapter adapter = new SimpleAdapter(
                     AccountListingActivity.this, accountList, R.layout.list_item, new String[]{
-                    KEY_ACCOUNT_ID, KEY_TITLE}, new int[]{R.id.accountId, R.id.accountTitle});
+                    KEY_ACCOUNT_ID, KEY_TITLE,KEY_PID}, new int[]{R.id.accountId, R.id.accountTitle});
             accountListView.setAdapter(adapter);
             accountListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
                         String accountId = ((TextView) view.findViewById(R.id.accountId)).getText().toString();
-                Intent intent = new Intent(getApplicationContext(),
-                        AccountUpdateOrDeleteActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AccountUpdateOrDeleteActivity.class);
                 intent.putExtra(KEY_ACCOUNT_ID, accountId);
                  startActivityForResult(intent, 20);
 

@@ -28,6 +28,8 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
     private static final String KEY_TITLE = "title";
     private static final String KEY_DESC = "description";
     private static final String KEY_DEV = "device";
+    private static final String KEY_PID = "pid";
+
     private static final String BASE_URL = "https://pw.lacl.fr/~u21402914/ProjetAndroid/";
 
     //les String utilise pour recupere et modifie
@@ -35,6 +37,7 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
     private String titleaccount;
     private String desc;
     private String dev;
+    private String pid;
 
     //On recupere les donnée de la base de donnée et avec possiblite de modifie
     private EditText titleResult;
@@ -68,10 +71,11 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
             }
         });
         updateButton = findViewById(R.id.btnUpdate);
-        /*updateButton.setOnClickListener(new View.OnClickListener() {
+        updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
+                    System.out.println("-------------------------------------------------h");
                     updateAccount();
                 } else {
                     Toast.makeText(AccountUpdateOrDeleteActivity.this,
@@ -80,7 +84,7 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
                 }
 
             }
-        });*/
+        });
 
     }
 
@@ -135,7 +139,9 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
 
     }
     private void updateAccount(){
+        System.out.println("-------------------------------------------------ha");
         if(!STRING_EMPTY.equals(titleResult.getText().toString()) && !STRING_EMPTY.equals(devResult.getText().toString())) {
+            System.out.println("-------------------------------------------------haa");
           titleaccount =titleResult.getText().toString();
           desc = descResult.getText().toString();
           dev = devResult.getText().toString();
@@ -162,14 +168,17 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
         }
         @Override
         protected String doInBackground(String... strings) {
+            System.out.println("-------------------------------------------------haaa");
             HttpJsonParser httpJsonParser = new HttpJsonParser();
             Map<String, String> httpParams = new HashMap<>();
             httpParams.put(KEY_ACCOUNT_ID, accountId);
             httpParams.put(KEY_TITLE, titleaccount);
             httpParams.put(KEY_DESC, desc);
             httpParams.put(KEY_DEV,dev);
+            /*httpParams.put(KEY_PID,pid);*/
+            System.out.println("ppppppppppppppppppppppppppppppppppp"+desc);
             JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "update_account.php", "POST", httpParams);
-            System.out.println(jsonObject.toString());
+            System.out.println("-------------------------------------------------haaaa");
             try {
                 success = jsonObject.getInt(KEY_SUCCESS);
             }catch (JSONException e) {
@@ -184,6 +193,7 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
                     if (success == 1) {
                         Toast.makeText(AccountUpdateOrDeleteActivity.this, "Account Updated", Toast.LENGTH_LONG).show();
                         Intent intent = getIntent();
+                        System.out.println("-------------------------------------------------haaaaaa");
                         setResult(20, intent);
                         finish();
                     } else {
