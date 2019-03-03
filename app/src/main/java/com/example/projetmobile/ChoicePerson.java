@@ -44,6 +44,7 @@ public class ChoicePerson extends AppCompatActivity {
                     Intent i = new Intent(getApplicationContext(),
                             AddPersonActivity.class);
                     startActivity(i);
+                    finish();
                 } else {
                     //Display error message if not connected to internet
                     Toast.makeText(ChoicePerson.this,
@@ -121,7 +122,9 @@ public class ChoicePerson extends AppCompatActivity {
 
                     Intent intent = new Intent(getApplicationContext(), AccountHomeActivity.class);
                     intent.putExtra(KEY_PERSON_ID,personId);
+                    System.out.println("CHOICE PERSON PERSON ID ------------------"+personId);
                     startActivityForResult(intent, 20);
+                    finish();
 
                 } else {
                     Toast.makeText(ChoicePerson.this,

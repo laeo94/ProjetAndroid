@@ -95,8 +95,8 @@ public class AddPersonActivity extends AppCompatActivity {
                     if (success == 1) {
                         Toast.makeText(AddPersonActivity.this,
                                 "Person Added", Toast.LENGTH_LONG).show();
-                        Intent i = getIntent();
-                        setResult(10, i);
+                        Intent intent = new Intent(getApplicationContext(),  ChoicePerson.class);
+                        startActivityForResult(intent, 15);
                         finish();
 
                     } else {
