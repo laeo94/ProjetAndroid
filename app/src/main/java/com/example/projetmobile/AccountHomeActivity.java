@@ -7,9 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-//TODO le nom de cette classe
-public class AccountHomeActivity extends AppCompatActivity {
 
+public class AccountHomeActivity extends AppCompatActivity {
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
