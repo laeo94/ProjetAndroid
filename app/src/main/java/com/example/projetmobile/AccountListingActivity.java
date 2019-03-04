@@ -30,7 +30,7 @@ public class AccountListingActivity extends AppCompatActivity {
     private static final String KEY_DESC = "description";
     private static final String KEY_DEV = "device";
     private static final String KEY_PERSON_ID = "pid";
-    private static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
+    private static final String BASE_URL = "https://pw.lacl.fr/~u21402914/ProjetAndroid/";
     private ArrayList<HashMap<String, String>> accountList;
     private ListView accountListView;
     private ProgressDialog pDialog;
@@ -65,31 +65,27 @@ public class AccountListingActivity extends AppCompatActivity {
             httpParams.put(KEY_PERSON_ID,personId);
             System.out.println("ACCOUNTLISTINGACTIVITY        PERSON ID ------------------"+personId);
             JSONObject jsonObject = httpJsonParser.makeHttpRequest(
-                    BASE_URL + "select_person_all_account.php", "GET",null);
+                    BASE_URL + "select_person_all_account.php", "GET",httpParams);
             System.out.println(jsonObject+"-------------------------------------------------");
             if (jsonObject == null) {
                 System.out.println("JSON NULL");
             }
             try {
                 int success = jsonObject.getInt(KEY_SUCCESS);
-                JSONArray account;
+                JSONArray person;
                 if (success == 1) {
-                    System.out.println("55555555555555555555555555555555555555555555555555555555555555555555");
                     accountList = new ArrayList<>();
-                    account = jsonObject.getJSONArray(KEY_DATA);
-                    //Iterate through the response and populate movies list
-                    for (int i = 0; i < account.length(); i++) {
-                        JSONObject accounts = account.getJSONObject(i);
-                        Integer accountId = accounts.getInt(KEY_ACCOUNT_ID);
-                        String accountTitle = accounts.getString(KEY_TITLE);
-                        System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM"+accountId+"    "+accountTitle);
-                        HashMap<String, String> map = new HashMap<>();
-                        map.put(KEY_ACCOUNT_ID, accountId.toString());
-                        map.put(KEY_TITLE, accountTitle);
+                    person= jsonObject.getJSONArray(KEY_DATA);
+                    for (int i = 0; i < person.length(); i++) {
+                        JSONObject accounts  = person.getJSONObject(i);
+                        String accountId = accounts.getString(KEY_ACCOUNT_ID);
+                        String title= accounts.getString(KEY_TITLE );
+                        HashMap<String, String> map = new HashMap<String, String>();
+                        map.put(KEY_ACCOUNT_ID, accountId);
+                        map.put(KEY_TITLE,title);
                         accountList.add(map);
                     }
                 }
-                System.out.println("88888888888888888888888888888888888888888888888888888888888888888888888888888");
             } catch (JSONException e) {
                 e.printStackTrace();
             }

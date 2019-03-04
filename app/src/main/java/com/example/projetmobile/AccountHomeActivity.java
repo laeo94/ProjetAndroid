@@ -56,7 +56,7 @@ public class AccountHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())){
-                    Intent intent = new Intent(getApplicationContext(),AccountHomeActivity.class);
+                    Intent intent = new Intent(getApplicationContext(),AddAccountActivity.class);
                     startActivity(intent);
                     finish();
                 }else{
