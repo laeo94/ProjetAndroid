@@ -117,9 +117,6 @@ public class ChoicePerson extends AppCompatActivity {
                 if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
                     String personId = ((TextView) view.findViewById(R.id.textView))
                             .getText().toString();
-                    String pseudo= ((TextView) view.findViewById(R.id.textView1))
-                            .getText().toString();
-
                     Intent intent = new Intent(getApplicationContext(), AccountHomeActivity.class);
                     intent.putExtra(KEY_PERSON_ID,personId);
                     System.out.println("CHOICE PERSON PERSON ID ------------------"+personId);
