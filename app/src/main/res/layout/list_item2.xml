@@ -9,7 +9,7 @@
 
 
     <TextView
-        android:id="@+id/accountId"
+        android:id="@+id/accountTitle"
         android:layout_width="245dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -17,19 +17,20 @@
         android:layout_marginStart="-2dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
-        android:layout_toEndOf="@+id/accountTitle"
+        android:layout_toEndOf="@+id/accountId"
         android:padding="30dp"
         android:textColor="?attr/actionModeSplitBackground"
         android:textSize="30sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/accountTitle"
         android:layout_width="115dp"
         android:layout_height="100dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="11dp"
+        android:textSize="30sp"
         android:layout_marginTop="0dp"
-        android:textSize="30sp" />
+        android:layout_marginStart="11dp"
+        android:layout_alignParentTop="true"
+        android:id="@+id/accountId"
+        android:layout_alignParentStart="true"/>
+
 </RelativeLayout>
