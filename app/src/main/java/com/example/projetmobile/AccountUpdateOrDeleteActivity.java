@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.style.UpdateAppearance;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -58,7 +57,7 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
         Intent intent = getIntent();
         accountId = intent.getStringExtra(KEY_ACCOUNT_ID);
         // Partie Selection
-        titleResult = (EditText) findViewById(R.id.accountTitle);
+        titleResult = (EditText) findViewById(R.id.accountId);
         devResult = (EditText) findViewById(R.id.accountDev);
         descResult = (EditText) findViewById(R.id.accountDesc);
 
@@ -216,7 +215,7 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
                         if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
-                            //If the user confirms deletion, execute DeleteMovieAsyncTask
+                            //If the user confirms deletion, execute DeleteAccountAsyncTask
                             new DeleteAccountAsyncTask().execute();
                         } else {
                             Toast.makeText(AccountUpdateOrDeleteActivity.this,
