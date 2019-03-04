@@ -13,14 +13,16 @@
 
     <ListView
         android:id="@+id/accountList"
-        android:layout_width="383dp"
-        android:layout_height="508dp"
+        android:layout_width="353dp"
+        android:layout_height="523dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginStart="20dp"
         android:layout_marginTop="117dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="75dp"
         android:divider="@android:color/transparent"
         android:dividerHeight="5dp"></ListView>
 

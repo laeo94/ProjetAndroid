@@ -1,8 +1,6 @@
 package com.example.projetmobile;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -12,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-//<<<<<<< HEAD
  import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,7 +28,6 @@ public class AccountHomeActivity extends AppCompatActivity {
     private  EditText pseudo;
     private String personId;
     private Button cancel;
-//d7f46b314d074129c33cc71ce3580cf1ee0d08f9
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -191,12 +187,12 @@ public class AccountHomeActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 public void run() {
                     if (success == 1) {
-                        Toast.makeText(AccountHomeActivity.this, "Account Updated", Toast.LENGTH_LONG).show();
+                        Toast.makeText(AccountHomeActivity.this, "Person Updated", Toast.LENGTH_LONG).show();
                         ok.setVisibility(View.INVISIBLE);
                         pseudo.setVisibility(View.INVISIBLE);
                         updatePerson.setVisibility(View.VISIBLE);
                     } else {
-                        Toast.makeText(AccountHomeActivity.this, "Some error occurred while updating Account", Toast.LENGTH_LONG).show();
+                        Toast.makeText(AccountHomeActivity.this, "Some error occurred while updating Person", Toast.LENGTH_LONG).show();
 
                     }
                 }

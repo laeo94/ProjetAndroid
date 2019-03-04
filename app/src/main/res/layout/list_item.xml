@@ -18,7 +18,7 @@
         android:layout_toEndOf="@+id/textView"
         android:padding="30dp"
         android:textColor="?attr/actionModeSplitBackground"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
     <TextView
@@ -27,6 +27,6 @@
         android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="0dp"
-        android:textSize="30sp" />
+        android:textSize="25sp" />
 
 </RelativeLayout>

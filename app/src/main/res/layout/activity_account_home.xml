@@ -9,11 +9,12 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/activity_home2"
-        android:layout_width="386dp"
-        android:layout_height="265dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="379dp"
+        android:layout_height="156dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:context=".AccountHomeActivity">
@@ -39,53 +40,55 @@
         android:id="@+id/updateperson"
         android:layout_width="186dp"
         android:layout_height="88dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="52dp"
         android:text="UpdatePerson"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button7"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
 
     <EditText
         android:id="@+id/textView3"
         android:layout_width="158dp"
         android:layout_height="42dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="108dp"
         android:contentDescription="New Pseudo"
         android:hint="New Pseudo"
+        app:layout_constraintBottom_toTopOf="@+id/ok"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity_home2" />
 
     <Button
         android:id="@+id/ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="240dp"
         android:text="ok"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button7"
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
         android:id="@+id/button7"
         android:layout_width="105dp"
         android:layout_height="67dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="72dp"
         android:text="Delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/updateperson"
-        app:layout_constraintHorizontal_bias="0.421"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ok" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="32dp"
         android:text="CANCEL"
+        app:layout_constraintBottom_toTopOf="@+id/updateperson"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/ok"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 </android.support.constraint.ConstraintLayout>
