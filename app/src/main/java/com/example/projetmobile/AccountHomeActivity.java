@@ -20,13 +20,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AccountHomeActivity extends AppCompatActivity {
-
+    private static final String STRING_EMPTY = "";
     private static final String KEY_SUCCESS = "success";
     private static final String KEY_PERSON_ID = "pid";
     private  static  final  String KEY_PSEUDO ="pseudo";
     private static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
     int success;
+    private Button updatePerson;
+    private  Button ok;
+    private  EditText pseudo;
     private String personId;
+    private Button cancel;
 //d7f46b314d074129c33cc71ce3580cf1ee0d08f9
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +39,11 @@ public class AccountHomeActivity extends AppCompatActivity {
         personId = getIntent().getStringExtra(KEY_PERSON_ID);
         Button viewAllBtn = (Button) findViewById(R.id.viewAllBtn);
         Button addNewBtn = (Button) findViewById(R.id.addNewBtn);
-        final Button updatePerson = (Button) findViewById(R.id.updateperson);
-        final EditText pseudo =findViewById(R.id.textView3);
-        final Button ok = findViewById(R.id.ok);
+        updatePerson = (Button) findViewById(R.id.updateperson);
+        pseudo =findViewById(R.id.textView3);
+        ok = findViewById(R.id.ok);
+        cancel = findViewById(R.id.button2);
+        cancel.setVisibility(View.INVISIBLE);
         final Button delete = findViewById(R.id.button7);
         ok.setVisibility(View.INVISIBLE);
         pseudo.setVisibility(View.INVISIBLE);
@@ -73,6 +79,23 @@ public class AccountHomeActivity extends AppCompatActivity {
                 updatePerson.setVisibility(View.INVISIBLE);
                 pseudo.setVisibility(View.VISIBLE);
                 ok.setVisibility(View.VISIBLE);
+                cancel.setVisibility(View.VISIBLE);
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        updatePerson.setVisibility(View.VISIBLE);
+                        pseudo.setVisibility(View.INVISIBLE);
+                        ok.setVisibility(View.INVISIBLE);
+                        cancel.setVisibility(View.INVISIBLE);
+                    }
+                });
+                ok.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        updatePseudo();
+                    }
+                });
+
             }
         });
 
@@ -135,6 +158,46 @@ public class AccountHomeActivity extends AppCompatActivity {
 
                     } else {
                         Toast.makeText(AccountHomeActivity.this, "Some error occurred while deleting person", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }
+    }
+    private void updatePseudo(){
+        if(!STRING_EMPTY.equals(pseudo.getText().toString())) {
+            new AccountHomeActivity.UpdatePersonAsynTask().execute();
+        }else{
+            Toast.makeText(AccountHomeActivity.this,
+                    "One or more fields left empty!",
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+    private class UpdatePersonAsynTask extends AsyncTask<String, String, String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            HttpJsonParser httpJsonParser = new HttpJsonParser();
+            Map<String, String> httpParams = new HashMap<>();
+            httpParams.put(KEY_PERSON_ID,personId);
+            httpParams.put(KEY_PSEUDO,pseudo.getText().toString());
+            JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "update_person.php", "POST", httpParams);
+            try {
+                success = jsonObject.getInt(KEY_SUCCESS);
+            }catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+        protected void onPostExecute(String result) {
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    if (success == 1) {
+                        Toast.makeText(AccountHomeActivity.this, "Account Updated", Toast.LENGTH_LONG).show();
+                        ok.setVisibility(View.INVISIBLE);
+                        pseudo.setVisibility(View.INVISIBLE);
+                        updatePerson.setVisibility(View.VISIBLE);
+                    } else {
+                        Toast.makeText(AccountHomeActivity.this, "Some error occurred while updating Account", Toast.LENGTH_LONG).show();
+
                     }
                 }
             });
