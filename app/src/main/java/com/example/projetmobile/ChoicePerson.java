@@ -109,7 +109,7 @@ public class ChoicePerson extends AppCompatActivity {
 
         // updating listview
         personListView.setAdapter(adapter);
-        //Call MovieUpdateDeleteActivity when a person is clicked
+        //Call AccountUpdateDeleteActivity when a person is clicked
         personListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

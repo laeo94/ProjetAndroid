@@ -1,5 +1,6 @@
 package com.example.projetmobile;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -11,21 +12,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import org.json.JSONException;
+//<<<<<<< HEAD
+ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
-//TODO le nom de cette classe
 public class AccountHomeActivity extends AppCompatActivity {
+
     private static final String KEY_SUCCESS = "success";
     private static final String KEY_PERSON_ID = "pid";
     private  static  final  String KEY_PSEUDO ="pseudo";
     private static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
     int success;
     private String personId;
+//d7f46b314d074129c33cc71ce3580cf1ee0d08f9
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,7 +93,7 @@ public class AccountHomeActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
                         if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
-                            //If the user confirms deletion, execute DeleteMovieAsyncTask
+                            //If the user confirms deletion, execute DeleteAccountAsyncTask
                             new AccountHomeActivity.DeletePersonAsyncTask().execute();
                         } else {
                             Toast.makeText(AccountHomeActivity.this,
