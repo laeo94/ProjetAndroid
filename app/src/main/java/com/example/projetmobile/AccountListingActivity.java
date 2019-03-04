@@ -30,7 +30,7 @@ public class AccountListingActivity extends AppCompatActivity {
     private static final String KEY_DESC = "description";
     private static final String KEY_DEV = "device";
     private static final String KEY_PERSON_ID = "pid";
-    private static final String BASE_URL = "https://pw.lacl.fr/~u21402914/ProjetAndroid/";
+    private static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
     private ArrayList<HashMap<String, String>> accountList;
     private ListView accountListView;
     private ProgressDialog pDialog;
@@ -63,28 +63,33 @@ public class AccountListingActivity extends AppCompatActivity {
             Map<String, String> httpParams = new HashMap<>();
             String personId = getIntent().getStringExtra(KEY_PERSON_ID);
             httpParams.put(KEY_PERSON_ID,personId);
+            System.out.println("ACCOUNTLISTINGACTIVITY        PERSON ID ------------------"+personId);
             JSONObject jsonObject = httpJsonParser.makeHttpRequest(
-                    BASE_URL + "select_person_all_account.php", "GET",httpParams);
+                    BASE_URL + "select_person_all_account.php", "GET",null);
+            System.out.println(jsonObject+"-------------------------------------------------");
             if (jsonObject == null) {
                 System.out.println("JSON NULL");
             }
             try {
                 int success = jsonObject.getInt(KEY_SUCCESS);
-                JSONArray person;
+                JSONArray account;
                 if (success == 1) {
+                    System.out.println("55555555555555555555555555555555555555555555555555555555555555555555");
                     accountList = new ArrayList<>();
-                    person= jsonObject.getJSONArray(KEY_DATA);
-                    for (int i = 0; i < person.length(); i++) {
-                        JSONObject accounts  = person.getJSONObject(i);
-                        String accountId = accounts.getString(KEY_ACCOUNT_ID);
-                        String title= accounts.getString(KEY_TITLE );
-                        HashMap<String, String> map = new HashMap<String, String>();
-
-                        map.put(KEY_ACCOUNT_ID, accountId);
-                        map.put(KEY_TITLE,title);
+                    account = jsonObject.getJSONArray(KEY_DATA);
+                    //Iterate through the response and populate movies list
+                    for (int i = 0; i < account.length(); i++) {
+                        JSONObject accounts = account.getJSONObject(i);
+                        Integer accountId = accounts.getInt(KEY_ACCOUNT_ID);
+                        String accountTitle = accounts.getString(KEY_TITLE);
+                        System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM"+accountId+"    "+accountTitle);
+                        HashMap<String, String> map = new HashMap<>();
+                        map.put(KEY_ACCOUNT_ID, accountId.toString());
+                        map.put(KEY_TITLE, accountTitle);
                         accountList.add(map);
                     }
                 }
+                System.out.println("88888888888888888888888888888888888888888888888888888888888888888888888888888");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -112,10 +117,9 @@ public class AccountListingActivity extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
                         String accountId = ((TextView) view.findViewById(R.id.accountId)).getText().toString();
-                        String accountTitle= ((TextView) view.findViewById(R.id.accountId)).getText().toString();
-                        Intent intent = new Intent(getApplicationContext(), AccountUpdateOrDeleteActivity.class);
-                        intent.putExtra(KEY_ACCOUNT_ID, accountId);
-                        startActivityForResult(intent, 20);
+                Intent intent = new Intent(getApplicationContext(), AccountUpdateOrDeleteActivity.class);
+                intent.putExtra(KEY_ACCOUNT_ID, accountId);
+                 startActivityForResult(intent, 20);
 
                     } else {
                         Toast.makeText(AccountListingActivity.this, "Unable to connect to internet", Toast.LENGTH_LONG).show();
@@ -132,8 +136,8 @@ public class AccountListingActivity extends AppCompatActivity {
         super.onActivityResult(requestCode,resultCode,data);
         if (resultCode == 20) {
             // If the result code is 20 that means that
-            // the user has deleted/updated the account.
-            // So refresh the account listing
+            // the user has deleted/updated the movie.
+            // So refresh the movie listing
             Intent intent = getIntent();
             finish();
             startActivity(intent);
