@@ -8,13 +8,20 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,18 +33,17 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
     private static final String KEY_ACCOUNT_ID = "aid";
     private static final String KEY_TITLE = "title";
     private static final String KEY_DESC = "description";
+    private static final String KEY_PERSON_ID ="uid";
+    private static final String KEY_PSEUDO ="pseudo";
     private static final String KEY_DEV = "device";
-    private static final String KEY_PID = "pid";
 
-    private static final String BASE_URL = "https://pw.lacl.fr/~u21402914/ProjetAndroid/";
+    private static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
 
     //les String utilise pour recupere et modifie
     private String accountId;
     private String titleaccount;
     private String desc;
     private String dev;
-    private String pid;
-
     //On recupere les donnée de la base de donnée et avec possiblite de modifie
     private EditText titleResult;
     private EditText descResult;
@@ -49,6 +55,8 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
 
     private int success;
     private ProgressDialog pDialog;
+    private ArrayList<HashMap<String, String>> personList;
+    private ListView personListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +68,7 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
         titleResult = (EditText) findViewById(R.id.accountId);
         devResult = (EditText) findViewById(R.id.accountDev);
         descResult = (EditText) findViewById(R.id.accountDesc);
-
+        personListView = findViewById(R.id.personList);
         new SelectAccountDetailAsynTask().execute();
         deleteButton = findViewById(R.id.btnDelete);
         deleteButton.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +92,81 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
 
             }
         });
+    }
+    private class FetchPersonAsyncTask extends AsyncTask<String,String,String>{
+        @Override
+        protected String doInBackground(String... strings) {
+            HttpJsonParser httpJsonParser = new HttpJsonParser();
+            Map<String, String> httpParams = new HashMap<>();
+            httpParams.put(KEY_ACCOUNT_ID, accountId);
+            System.out.println("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm"+accountId);
+            JSONObject jsonObject = httpJsonParser.makeHttpRequest(
+                    BASE_URL + "select_all_person_participate.php", "GET", httpParams);
+            if (jsonObject == null) {
+                System.out.println("JSON NULL");
+            }
+            try {
+                int success = jsonObject.getInt(KEY_SUCCESS);
+                JSONArray person;
+                if (success == 1) {
+                    personList = new ArrayList<>();
+                    person= jsonObject.getJSONArray(KEY_DATA);
+                    for (int i = 0; i < person.length(); i++) {
+                        JSONObject accounts  = person.getJSONObject(i);
+                        String pseudo = accounts.getString(KEY_PSEUDO);
+                        String uid = accounts.getString(KEY_PERSON_ID );
+                        HashMap<String, String> map = new HashMap<String, String>();
+                        map.put(KEY_PERSON_ID, uid);
+                        map.put(KEY_PSEUDO,pseudo);
+                        System.out.println("------------------------------------------------"+pseudo);
+                        personList.add(map);
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+        protected void onPostExecute(String result) {
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    populatePersonList();
+
+                }
+            });
+        }
+    }
+
+    //Updating parsed JSON data into ListView
+    private void populatePersonList() {
+        ListAdapter adapter = new SimpleAdapter(
+                AccountUpdateOrDeleteActivity.this, personList,
+                R.layout.list_item, new String[]{KEY_PERSON_ID,
+                KEY_PSEUDO},
+                new int[]{R.id.textView, R.id.textView1});
+
+        // updating listview
+        personListView.setAdapter(adapter);
+        //Call MovieUpdateDeleteActivity when a person is clicked
+        personListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //Check for network connectivity
+                if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
+                    String personId = ((TextView) view.findViewById(R.id.textView))
+                            .getText().toString();
+
+                } else {
+                    Toast.makeText(AccountUpdateOrDeleteActivity.this,
+                            "Unable to connect to internet",
+                            Toast.LENGTH_LONG).show();
+
+                }
+
+
+            }
+        });
+
 
     }
 
@@ -130,7 +213,7 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
                     titleResult.setText(titleaccount);
                     devResult.setText(dev);
                     descResult.setText(desc);
-
+                    new FetchPersonAsyncTask().execute();
 
 
                 }

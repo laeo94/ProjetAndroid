@@ -19,7 +19,7 @@ import java.util.Map;
 public class AccountHomeActivity extends AppCompatActivity {
     private static final String STRING_EMPTY = "";
     private static final String KEY_SUCCESS = "success";
-    private static final String KEY_PERSON_ID = "pid";
+    private static final String KEY_PERSON_ID = "uid";
     private  static  final  String KEY_PSEUDO ="pseudo";
     private static final String BASE_URL = "https://pw.lacl.fr/~u21402914/ProjetAndroid/";
     int success;
@@ -62,7 +62,6 @@ public class AccountHomeActivity extends AppCompatActivity {
                 if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())){
                     Intent intent = new Intent(getApplicationContext(),AddAccountActivity.class);
                     startActivity(intent);
-                    finish();
                 }else{
                     Toast.makeText(AccountHomeActivity.this,"Unable to connect to internet",Toast.LENGTH_LONG).show();
                 }

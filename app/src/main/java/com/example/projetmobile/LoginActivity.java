@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        signup.setOnClickListener(new View.OnClickListener() {
+     signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),AddUserActivity.class);
@@ -104,8 +104,8 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             runOnUiThread(new Runnable() {
                 public void run() {
-                    if(success ==1) login();
-                    if(success ==2){
+                   if(success ==1) login();
+                   if(success ==2){
                         Toast.makeText(LoginActivity.this, "mdp not valide retry", Toast.LENGTH_LONG).show();
 
                     }

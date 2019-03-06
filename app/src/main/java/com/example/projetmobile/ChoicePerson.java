@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ChoicePerson extends AppCompatActivity {
-    private static final String KEY_SUCCESS = "success", KEY_DATA = "data",KEY_PERSON_ID = "pid", KEY_PSEUDO ="pseudo";
+    private static final String KEY_SUCCESS = "success", KEY_DATA = "data",KEY_PERSON_ID = "uid", KEY_PSEUDO ="pseudo";
     private static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
     private ArrayList<HashMap<String, String>> personList;
     private ListView personListView;
