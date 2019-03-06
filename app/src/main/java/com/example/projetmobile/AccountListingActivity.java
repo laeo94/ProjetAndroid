@@ -27,10 +27,8 @@ public class AccountListingActivity extends AppCompatActivity {
     private static final String KEY_DATA = "data";
     private static final String KEY_ACCOUNT_ID = "aid";
     private static final String KEY_TITLE = "title";
-    private static final String KEY_DESC = "description";
-    private static final String KEY_DEV = "device";
-    private static final String KEY_PERSON_ID = "pid";
-    private static final String BASE_URL = "https://pw.lacl.fr/~u21402914/ProjetAndroid/";
+    private static final String KEY_PERSON_ID = "uid";
+    private static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
     private ArrayList<HashMap<String, String>> accountList;
     private ListView accountListView;
     private ProgressDialog pDialog;

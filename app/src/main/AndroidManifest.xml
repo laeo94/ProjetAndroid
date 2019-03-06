@@ -25,6 +25,7 @@
         <activity android:name=".AccountListingActivity" />
         <activity android:name=".AccountUpdateOrDeleteActivity" />
         <activity android:name=".AddAccountActivity" />
+        <activity android:name=".AddUserActivity" />
         <activity android:name=".LoginActivity"></activity>
     </application>
 
