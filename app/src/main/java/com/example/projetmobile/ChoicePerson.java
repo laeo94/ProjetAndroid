@@ -42,7 +42,7 @@ public class ChoicePerson extends AppCompatActivity {
                 //Check for network connectivity
                 if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
                     Intent i = new Intent(getApplicationContext(),
-                            AddPersonActivity.class);
+                            AddUserActivity.class);
                     startActivity(i);
                     finish();
                 } else {
