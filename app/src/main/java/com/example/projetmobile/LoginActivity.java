@@ -28,15 +28,13 @@ public class LoginActivity extends AppCompatActivity {
     private static final String STRING_EMPTY = "";
     private static final String KEY_SUCCESS = "success";
     private static final String KEY_DATA = "data";
-    private static final String KEY_UID = "uid";
+    private static final String KEY_PERSON_ID= "uid";
     private static final String KEY_PSEUDO = "pseudo";
     private static final String KEY_MDP = "mdp";
     private static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
     EditText user, password;
-    Button login;
+    Button login,signup;
     String pass, username, uid;
-    String url;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         user =  findViewById(R.id.txtuser);
         password =  findViewById(R.id.txtmdp);
         login =  findViewById(R.id.userlogin);
-
+        signup = findViewById(R.id.btnAdd);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,15 +63,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-     /*   signup.setOnClickListener(new View.OnClickListener() {
+     signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                Intent intent = new Intent(MainActivity.this,Signup.class);
+                Intent intent = new Intent(getApplicationContext(),AddUserActivity.class);
                 startActivity(intent);
+                finish();
             }
-        });*/
+        });
     }
 
     private class FindUserAsynTask extends AsyncTask<String, String, String> {
@@ -81,13 +78,12 @@ public class LoginActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             HttpJsonParser httpJsonParser = new HttpJsonParser();
             Map<String, String> httpParams = new HashMap<>();
-            String pseudo = getIntent().getStringExtra(KEY_PSEUDO);
-            String pass = getIntent().getStringExtra(KEY_MDP);
+            String pseudo = user.getText().toString();
+            String pass = password.getText().toString();
             httpParams.put(KEY_PSEUDO, pseudo);
             httpParams.put(KEY_MDP, pass);
             JSONObject jsonObject = httpJsonParser.makeHttpRequest(
                     BASE_URL + "login.php", "GET", httpParams);
-            System.out.println(jsonObject + "-------------------------------------------------");
             if (jsonObject == null) {
                 System.out.println("JSON NULL");
             }
@@ -97,7 +93,8 @@ public class LoginActivity extends AppCompatActivity {
                 if (success == 1) {
                     person = jsonObject.getJSONArray(KEY_DATA);
                     JSONObject accounts = person.getJSONObject(0);
-                    uid = accounts.getString(KEY_UID);
+                    uid = accounts.getString(KEY_PERSON_ID);
+                    System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+accounts.getString(KEY_PERSON_ID));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -116,9 +113,11 @@ public class LoginActivity extends AppCompatActivity {
         private void login() {
 
             if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
-                Intent intent = new Intent(getApplicationContext(), AccountUpdateOrDeleteActivity.class);
-                intent.putExtra(KEY_UID, uid);
+                Intent intent = new Intent(getApplicationContext(),AccountHomeActivity.class);
+                System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+uid);
+                intent.putExtra(KEY_PERSON_ID,uid);
                 startActivityForResult(intent, 20);
+                finish();
 
             } else {
                 Toast.makeText(LoginActivity.this, "Unable to connect to internet", Toast.LENGTH_LONG).show();
