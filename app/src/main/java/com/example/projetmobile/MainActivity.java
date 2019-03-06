@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,9 +18,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Si la connexion avec internet fonctionne
-                if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
+              if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
                     Intent i = new Intent(getApplicationContext(),
-                            ChoicePerson.class);
+                            LoginActivity.class);
                     startActivity(i);
                 } else {
                     //Display error message if not connected to internet
