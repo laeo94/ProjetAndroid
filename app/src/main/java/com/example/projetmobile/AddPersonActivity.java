@@ -21,7 +21,7 @@ public class AddPersonActivity extends AppCompatActivity {
     private static final String KEY_SUCCESS = "success";
     private static final String KEY_PSEUDO = "pseudo";
     private static String STRING_EMPTY = "";
-    private static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
+    private static final String BASE_URL = "https://pw.lacl.fr/~u21402914/ProjetAndroid/";
     private String strperson;
     private EditText pseudoPerson;
     private Button add;

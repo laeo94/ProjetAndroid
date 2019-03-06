@@ -21,7 +21,7 @@ public class AccountHomeActivity extends AppCompatActivity {
     private static final String KEY_SUCCESS = "success";
     private static final String KEY_PERSON_ID = "pid";
     private  static  final  String KEY_PSEUDO ="pseudo";
-    private static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
+    private static final String BASE_URL = "https://pw.lacl.fr/~u21402914/ProjetAndroid/";
     int success;
     private Button updatePerson;
     private  Button ok;

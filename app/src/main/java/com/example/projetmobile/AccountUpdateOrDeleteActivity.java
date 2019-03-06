@@ -107,6 +107,7 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
             Map<String, String> httpParams = new HashMap<>();
             httpParams.put(KEY_ACCOUNT_ID, accountId);
             JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "get_account.php", "GET", httpParams);
+            System.out.println("accountId");
             try {
                 int success = jsonObject.getInt(KEY_SUCCESS);
                 JSONObject account;
@@ -174,7 +175,6 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
             httpParams.put(KEY_TITLE, titleaccount);
             httpParams.put(KEY_DESC, desc);
             httpParams.put(KEY_DEV,dev);
-            /*httpParams.put(KEY_PID,pid);*/
             System.out.println("ppppppppppppppppppppppppppppppppppp"+desc);
             JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "update_account.php", "POST", httpParams);
             System.out.println("-------------------------------------------------haaaa");
