@@ -8,13 +8,13 @@
 
     <TextView
         android:id="@+id/textView1"
-        android:layout_width="329dp"
-        android:layout_height="105dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="-115dp"
         android:layout_marginTop="0dp"
-        android:layout_marginEnd="0dp"
+        android:layout_marginEnd="115dp"
         android:layout_toEndOf="@+id/textView"
         android:padding="30dp"
         android:textColor="?attr/actionModeSplitBackground"
@@ -28,6 +28,16 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="0dp"
         android:textSize="25sp"
-        android:visibility="visible" />
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="81dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="16dp"
+        android:text="Delete" />
 
 </RelativeLayout>

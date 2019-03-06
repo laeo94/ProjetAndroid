@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText user, password;
     Button login,signup;
     String pass, username, uid;
-
+    private static  int success;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,13 +88,12 @@ public class LoginActivity extends AppCompatActivity {
                 System.out.println("JSON NULL");
             }
             try {
-                int success = jsonObject.getInt(KEY_SUCCESS);
+                success = jsonObject.getInt(KEY_SUCCESS);
                 JSONArray person;
                 if (success == 1) {
                     person = jsonObject.getJSONArray(KEY_DATA);
                     JSONObject accounts = person.getJSONObject(0);
                     uid = accounts.getString(KEY_PERSON_ID);
-                    System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+accounts.getString(KEY_PERSON_ID));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -105,7 +104,11 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             runOnUiThread(new Runnable() {
                 public void run() {
-                    login();
+                   if(success ==1) login();
+                   if(success ==2){
+                        Toast.makeText(LoginActivity.this, "mdp not valide retry", Toast.LENGTH_LONG).show();
+
+                    }
                 }
             });
         }
@@ -114,7 +117,6 @@ public class LoginActivity extends AppCompatActivity {
 
             if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
                 Intent intent = new Intent(getApplicationContext(),AccountHomeActivity.class);
-                System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+uid);
                 intent.putExtra(KEY_PERSON_ID,uid);
                 startActivityForResult(intent, 20);
                 finish();

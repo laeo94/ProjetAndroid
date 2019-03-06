@@ -62,7 +62,6 @@ public class AccountHomeActivity extends AppCompatActivity {
                 if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())){
                     Intent intent = new Intent(getApplicationContext(),AddAccountActivity.class);
                     startActivity(intent);
-                    finish();
                 }else{
                     Toast.makeText(AccountHomeActivity.this,"Unable to connect to internet",Toast.LENGTH_LONG).show();
                 }
