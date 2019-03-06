@@ -22,9 +22,6 @@ public class HttpJsonParser {
     static JSONObject jObj = null;
     static String json = "";
     HttpURLConnection urlConnection = null;
-
-    // function get json from url
-    // by making HTTP POST or GET method
     public JSONObject makeHttpRequest(String url, String method,
                                       Map<String, String> params) {
 

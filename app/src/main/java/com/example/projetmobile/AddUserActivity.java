@@ -17,9 +17,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AddUserActivity extends AppCompatActivity {
-    private static final String KEY_SUCCESS = "success", KEY_PSEUDO ="pseudo",KEY_MDP = "mdp",KEY_MDP2 = "mdp2",STRING_EMPTY = "";
+    private static final String KEY_SUCCESS = "success", KEY_PSEUDO ="pseudo",KEY_MDP = "mdp",STRING_EMPTY = "";
     private static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
-    private String strpseudo, strmdp;
+    private String pseudo, mdp;
     private EditText pseudoUser, mdpUser, mdp2User;
     private Button add;
     private int success;
@@ -50,8 +50,8 @@ public class AddUserActivity extends AppCompatActivity {
     private void addUser(){
         if (!STRING_EMPTY.equals(pseudoUser.getText().toString()) &&!STRING_EMPTY.equals(mdpUser.getText().toString())&&!STRING_EMPTY.equals(mdp2User.getText().toString())) {
             if(mdpUser.getText().toString().equals(mdp2User.getText().toString())) {
-                strpseudo = pseudoUser.getText().toString();
-                strmdp = mdpUser.getText().toString();
+                pseudo = pseudoUser.getText().toString();
+                mdp = mdpUser.getText().toString();
                 new AddUserAsyncTask().execute();
             }else{
                 Toast.makeText(AddUserActivity.this,
@@ -69,9 +69,8 @@ public class AddUserActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            //Display progress bar
             pDialog = new ProgressDialog(AddUserActivity.this);
-            pDialog.setMessage("Updating Account. Please wait...");
+            pDialog.setMessage("Add user.. Please wait...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(false);
             pDialog.show();
@@ -80,12 +79,9 @@ public class AddUserActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             HttpJsonParser httpJsonParser = new HttpJsonParser();
             Map<String, String> httpParams = new HashMap<>();
-            //Populating request parameters
-            httpParams.put(KEY_PSEUDO, strpseudo);
-            httpParams.put(KEY_MDP,strmdp);
-
-            JSONObject jsonObject = httpJsonParser.makeHttpRequest(
-                    BASE_URL + "add_user.php", "POST", httpParams);
+            httpParams.put(KEY_PSEUDO, pseudo);
+            httpParams.put(KEY_MDP,mdp);
+            JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "add_user.php", "POST", httpParams);
             try {
                 success = jsonObject.getInt(KEY_SUCCESS);
             } catch (JSONException e) {
@@ -100,13 +96,16 @@ public class AddUserActivity extends AppCompatActivity {
                     if (success == 1) {
                         Toast.makeText(AddUserActivity.this,
                                 "User Added", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(getApplicationContext(),ChoicePerson.class);
+                        Intent intent = new Intent(getApplicationContext(), ChoicePerson.class);
                         startActivityForResult(intent, 15);
                         finish();
-
+                    }else if(success==2){
+                        Toast.makeText(AddUserActivity.this,
+                                "pseudo already taken, please change! ",
+                                Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(AddUserActivity.this,
-                                "Some error occurred while adding person : pseudo",
+                                "Some error occurred while adding person ",
                                 Toast.LENGTH_LONG).show();
 
                     }

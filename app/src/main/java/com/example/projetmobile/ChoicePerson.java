@@ -21,22 +21,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ChoicePerson extends AppCompatActivity {
-    private static final String KEY_SUCCESS = "success";
-    private static final String KEY_DATA = "data";
-    private static final String KEY_PERSON_ID = "pid";
-    private static final String KEY_PSEUDO ="pseudo";
+    private static final String KEY_SUCCESS = "success", KEY_DATA = "data",KEY_PERSON_ID = "pid", KEY_PSEUDO ="pseudo";
     private static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
     private ArrayList<HashMap<String, String>> personList;
     private ListView personListView;
-    private Button nouveau;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choice_person);
         personListView = findViewById(R.id.personList);
-        nouveau = findViewById(R.id.button);
-        nouveau.setOnClickListener(new View.OnClickListener() {
+        Button add;
+        add= findViewById(R.id.button);
+        add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Check for network connectivity

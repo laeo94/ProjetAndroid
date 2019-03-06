@@ -44,11 +44,11 @@ public class AddAccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_account);
-        accountTitleEditText = (EditText) findViewById(R.id.txtAccountTitleAdd);
-        accountDescEditText = (EditText) findViewById(R.id.txtAccountDescAdd);
-        accountDevEditText = (EditText) findViewById(R.id.txtAccountDevAdd);
-        accountPidEditText = (EditText) findViewById(R.id.txtpidadd);
-        addButton = (Button) findViewById(R.id.btnAdd);
+        accountTitleEditText = findViewById(R.id.txtAccountTitleAdd);
+        accountDescEditText =  findViewById(R.id.txtAccountDescAdd);
+        accountDevEditText = findViewById(R.id.txtAccountDevAdd);
+        accountPidEditText =  findViewById(R.id.txtpidadd);
+        addButton = findViewById(R.id.btnAdd);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,7 +83,6 @@ public class AddAccountActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute(){
         super.onPreExecute();
-        //Display progress bar
         pDialog = new ProgressDialog(AddAccountActivity.this);
         pDialog.setMessage("Adding Account. Please wait...");
         pDialog.setIndeterminate(false);
@@ -98,8 +97,7 @@ public class AddAccountActivity extends AppCompatActivity {
             httpParams.put(KEY_DESC, accountDesc);
             httpParams.put(KEY_DEV, accountDev);
             httpParams.put(KEY_PID,accountPid);
-            JSONObject jsonObject = httpJsonParser.makeHttpRequest(
-                    BASE_URL + "add_account.php", "POST", httpParams);
+            JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "add_account.php", "POST", httpParams);
             try {
                 success = jsonObject.getInt(KEY_SUCCESS);
             } catch (JSONException e) {
