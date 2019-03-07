@@ -19,32 +19,42 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
-public class ChoicePerson extends AppCompatActivity {
-    private static final String KEY_SUCCESS = "success", KEY_DATA = "data",KEY_PERSON_ID = "uid", KEY_PSEUDO ="pseudo";
-    private static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
+public class ListParticipateActivity extends AppCompatActivity {
+    private static final String KEY_SUCCESS = "success";
+    private static final String KEY_DATA = "data";
+    private static final String KEY_ACCOUNT_ID = "aid";
+    private static final String KEY_TITLE = "title";
+    private static final String KEY_PERSON_ID = "uid";
+    private static final String KEY_PSEUDO = "uid";
+    private static final String BASE_URL = "https://pw.lacl.fr/~u21402914/ProjetAndroid/";
+    private ArrayList<HashMap<String, String>> accountList;
     private ArrayList<HashMap<String, String>> personList;
     private ListView personListView;
-
+    private String accountId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_choice_person);
+        setContentView(R.layout.activity_list_part);
         personListView = findViewById(R.id.personList);
-        Button add;
-        add= findViewById(R.id.button);
-        add.setOnClickListener(new View.OnClickListener() {
+        Intent intent = getIntent();
+        accountId = intent.getStringExtra(KEY_ACCOUNT_ID);
+        Button info;
+        info = findViewById(R.id.Information);
+        info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Check for network connectivity
                 if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
                     Intent i = new Intent(getApplicationContext(),
-                            AddUserActivity.class);
+                            AccountUpdateOrDeleteActivity.class);
+                    i.putExtra(KEY_ACCOUNT_ID,accountId);
                     startActivity(i);
                     finish();
                 } else {
                     //Display error message if not connected to internet
-                    Toast.makeText(ChoicePerson.this,
+                    Toast.makeText(ListParticipateActivity.this,
                             "Unable to connect to internet",
                             Toast.LENGTH_LONG).show();
 
@@ -55,13 +65,14 @@ public class ChoicePerson extends AppCompatActivity {
         new FetchPersonAsyncTask().execute();
     }
 
-    //Fetche the list of person from the server
     private class FetchPersonAsyncTask extends AsyncTask<String,String,String>{
         @Override
         protected String doInBackground(String... strings) {
             HttpJsonParser httpJsonParser = new HttpJsonParser();
+            Map<String, String> httpParams = new HashMap<>();
+            httpParams.put(KEY_ACCOUNT_ID, accountId);
             JSONObject jsonObject = httpJsonParser.makeHttpRequest(
-                    BASE_URL + "select_all_person.php", "GET", null);
+                    BASE_URL + "select_all_person_participate.php", "GET", httpParams);
             if (jsonObject == null) {
                 System.out.println("JSON NULL");
             }
@@ -73,11 +84,12 @@ public class ChoicePerson extends AppCompatActivity {
                     person= jsonObject.getJSONArray(KEY_DATA);
                     for (int i = 0; i < person.length(); i++) {
                         JSONObject accounts  = person.getJSONObject(i);
-                        String pseudo = accounts.getString(KEY_PSEUDO);
-                        String personId = accounts.getString(KEY_PERSON_ID );
+                        String  pseudo = accounts.getString(KEY_PSEUDO);
+                        String uid = accounts.getString(KEY_PERSON_ID );
                         HashMap<String, String> map = new HashMap<String, String>();
-                        map.put(KEY_PERSON_ID, personId);
+                        map.put(KEY_PERSON_ID, uid);
                         map.put(KEY_PSEUDO,pseudo);
+                        System.out.println("------------------------------------------------"+pseudo);
                         personList.add(map);
                     }
                 }
@@ -99,7 +111,7 @@ public class ChoicePerson extends AppCompatActivity {
     //Updating parsed JSON data into ListView
     private void populatePersonList() {
         ListAdapter adapter = new SimpleAdapter(
-                ChoicePerson.this, personList,
+                ListParticipateActivity.this, personList,
                 R.layout.list_item, new String[]{KEY_PERSON_ID,
                 KEY_PSEUDO},
                 new int[]{R.id.textView, R.id.textView1});
@@ -112,19 +124,14 @@ public class ChoicePerson extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //Check for network connectivity
                 if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
-                    String personId = ((TextView) view.findViewById(R.id.textView))
-                            .getText().toString();
-                    String pseudo= ((TextView) view.findViewById(R.id.textView1))
-                            .getText().toString();
-
-                    Intent intent = new Intent(getApplicationContext(), AccountHomeActivity.class);
+                    String personId = ((TextView) view.findViewById(R.id.textView)).getText().toString();
+                    Intent intent = new Intent(getApplicationContext(),DepenseActivity.class);
                     intent.putExtra(KEY_PERSON_ID,personId);
-                    System.out.println("CHOICE PERSON PERSON ID ------------------"+personId);
+                    System.out.println("CHOICE PERSON In LIST ID ------------------"+personId);
                     startActivityForResult(intent, 20);
                     finish();
-
                 } else {
-                    Toast.makeText(ChoicePerson.this,
+                    Toast.makeText(ListParticipateActivity.this,
                             "Unable to connect to internet",
                             Toast.LENGTH_LONG).show();
 
@@ -136,4 +143,5 @@ public class ChoicePerson extends AppCompatActivity {
 
 
     }
+
 }

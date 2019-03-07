@@ -29,12 +29,12 @@ public class AddAccountActivity extends AppCompatActivity {
     private EditText accountTitleEditText;
     private EditText accountDescEditText;
     private EditText accountDevEditText;
-    private EditText accountPidEditText;
+
 
     private String accountTitle;
     private String accountDesc;
     private String accountDev;
-    private String accountPid;
+
     private Button addButton;
     private int success;
     private ProgressDialog pDialog;
@@ -47,7 +47,6 @@ public class AddAccountActivity extends AppCompatActivity {
         accountTitleEditText = findViewById(R.id.txtAccountTitleAdd);
         accountDescEditText =  findViewById(R.id.txtAccountDescAdd);
         accountDevEditText = findViewById(R.id.txtAccountDevAdd);
-        accountPidEditText =  findViewById(R.id.txtpidadd);
         addButton = findViewById(R.id.btnAdd);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +70,7 @@ public class AddAccountActivity extends AppCompatActivity {
             accountTitle = accountTitleEditText.getText().toString();
             accountDesc = accountDescEditText.getText().toString();
             accountDev = accountDevEditText.getText().toString();
-            accountPid = accountPidEditText.getText().toString();
+
             new AddAccountAsynTask().execute();
         } else {
             Toast.makeText(AddAccountActivity.this, "One or more fields left empty!", Toast.LENGTH_LONG).show();
@@ -96,7 +95,6 @@ public class AddAccountActivity extends AppCompatActivity {
             httpParams.put(KEY_TiTLE, accountTitle);
             httpParams.put(KEY_DESC, accountDesc);
             httpParams.put(KEY_DEV, accountDev);
-            httpParams.put(KEY_PID,accountPid);
             JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "add_account.php", "POST", httpParams);
             try {
                 success = jsonObject.getInt(KEY_SUCCESS);

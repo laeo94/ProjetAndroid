@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ChoicePerson" />
+        <activity android:name=".ListParticipateActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,9 +24,11 @@
         <activity android:name=".AccountHomeActivity" />
         <activity android:name=".AccountListingActivity" />
         <activity android:name=".AccountUpdateOrDeleteActivity" />
-        <activity android:name=".AddUserActivity"/>
+        <activity android:name=".AddUserActivity" />
         <activity android:name=".AddAccountActivity" />
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".AddUserActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".DepenseActivity"></activity>
     </application>
 
 </manifest>

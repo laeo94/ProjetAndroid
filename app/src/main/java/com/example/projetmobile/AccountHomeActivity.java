@@ -35,7 +35,7 @@ public class AccountHomeActivity extends AppCompatActivity {
         personId = getIntent().getStringExtra(KEY_PERSON_ID);
         Button viewAllBtn = (Button) findViewById(R.id.viewAllBtn);
         Button addNewBtn = (Button) findViewById(R.id.addNewBtn);
-        updatePerson = (Button) findViewById(R.id.updateperson);
+        updatePerson = (Button) findViewById(R.id.updateuser);
         pseudo =findViewById(R.id.textView3);
         ok = findViewById(R.id.ok);
         cancel = findViewById(R.id.button2);
@@ -133,7 +133,7 @@ public class AccountHomeActivity extends AppCompatActivity {
             HttpJsonParser httpJsonParser = new HttpJsonParser();
             Map<String, String> httpParams = new HashMap<>();
             httpParams.put(KEY_PERSON_ID, personId);
-            JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "delete_person.php", "POST", httpParams);
+            JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "delete_user.php", "POST", httpParams);
             try {
                 success = jsonObject.getInt(KEY_SUCCESS);
             } catch (JSONException e) {
@@ -148,7 +148,7 @@ public class AccountHomeActivity extends AppCompatActivity {
                         //Display success message
                         Toast.makeText(AccountHomeActivity.this, "Person Deleted", Toast.LENGTH_LONG).show();
                         finish();
-                        Intent i = new Intent(getApplicationContext(),ChoicePerson.class);
+                        Intent i = new Intent(getApplicationContext(),ListParticipateActivity.class);
                         startActivity(i);
 
                     } else {
@@ -174,7 +174,7 @@ public class AccountHomeActivity extends AppCompatActivity {
             Map<String, String> httpParams = new HashMap<>();
             httpParams.put(KEY_PERSON_ID,personId);
             httpParams.put(KEY_PSEUDO,pseudo.getText().toString());
-            JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "update_person.php", "POST", httpParams);
+            JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "update_user.php", "POST", httpParams);
             try {
                 success = jsonObject.getInt(KEY_SUCCESS);
             }catch (JSONException e) {

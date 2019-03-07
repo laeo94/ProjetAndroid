@@ -1,5 +1,5 @@
 package com.example.projetmobile;
-
+//TODO faire un ajoute dans la liste de participation pour pouboir voir dans la prend liste ou alors modifie
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -28,7 +28,7 @@ public class AccountListingActivity extends AppCompatActivity {
     private static final String KEY_ACCOUNT_ID = "aid";
     private static final String KEY_TITLE = "title";
     private static final String KEY_PERSON_ID = "uid";
-    private static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
+    private static final String BASE_URL = "https://pw.lacl.fr/~u21402914/ProjetAndroid/";
     private ArrayList<HashMap<String, String>> accountList;
     private ListView accountListView;
     private ProgressDialog pDialog;
@@ -111,7 +111,7 @@ public class AccountListingActivity extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
                         String accountId = ((TextView) view.findViewById(R.id.accountId)).getText().toString();
-                        Intent intent = new Intent(getApplicationContext(), AccountUpdateOrDeleteActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), ListParticipateActivity.class);
                         intent.putExtra(KEY_ACCOUNT_ID, accountId);
                         startActivityForResult(intent, 20);
 
