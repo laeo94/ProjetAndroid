@@ -37,7 +37,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/updateuser"
+        android:id="@+id/updateperson"
         android:layout_width="133dp"
         android:layout_height="60dp"
         android:background="@color/colorPrimary"
@@ -55,7 +55,7 @@
         android:layout_height="42dp"
         android:contentDescription="New Pseudo"
         android:hint="New Pseudo"
-        app:layout_constraintBottom_toTopOf="@+id/ok"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,7 +80,7 @@
         android:background="@color/colorPrimary"
         android:text="Delete"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/updateuser"
+        app:layout_constraintEnd_toStartOf="@+id/updateperson"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ok" />
@@ -91,7 +91,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
         android:text="CANCEL"
-        app:layout_constraintBottom_toTopOf="@+id/updateuser"
+        app:layout_constraintBottom_toTopOf="@+id/updateperson"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/ok"

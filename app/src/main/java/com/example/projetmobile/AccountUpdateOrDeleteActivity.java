@@ -37,7 +37,7 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
     private static final String KEY_PSEUDO ="pseudo";
     private static final String KEY_DEV = "device";
 
-    private static final String BASE_URL = "https://pw.lacl.fr/~u21402914/ProjetAndroid/";
+    private static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
 
     //les String utilise pour recupere et modifie
     private String accountId , pseudo ,titleaccount,desc,dev;
@@ -194,8 +194,7 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
                     if (success == 1) {
                         Toast.makeText(AccountUpdateOrDeleteActivity.this, "Account Updated", Toast.LENGTH_LONG).show();
                         Intent intent = getIntent();
-                        System.out.println("-------------------------------------------------haaaaaa");
-                        setResult(20, intent);
+                        startActivity(intent);
                         finish();
                     } else {
                         Toast.makeText(AccountUpdateOrDeleteActivity.this, "Some error occurred while updating Account", Toast.LENGTH_LONG).show();

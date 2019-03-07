@@ -25,11 +25,9 @@ public class ListParticipateActivity extends AppCompatActivity {
     private static final String KEY_SUCCESS = "success";
     private static final String KEY_DATA = "data";
     private static final String KEY_ACCOUNT_ID = "aid";
-    private static final String KEY_TITLE = "title";
     private static final String KEY_PERSON_ID = "uid";
-    private static final String KEY_PSEUDO = "uid";
-    private static final String BASE_URL = "https://pw.lacl.fr/~u21402914/ProjetAndroid/";
-    private ArrayList<HashMap<String, String>> accountList;
+    private static final String KEY_PSEUDO = "pseudo";
+    private static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
     private ArrayList<HashMap<String, String>> personList;
     private ListView personListView;
     private String accountId;
@@ -51,7 +49,6 @@ public class ListParticipateActivity extends AppCompatActivity {
                             AccountUpdateOrDeleteActivity.class);
                     i.putExtra(KEY_ACCOUNT_ID,accountId);
                     startActivity(i);
-                    finish();
                 } else {
                     //Display error message if not connected to internet
                     Toast.makeText(ListParticipateActivity.this,
@@ -89,7 +86,6 @@ public class ListParticipateActivity extends AppCompatActivity {
                         HashMap<String, String> map = new HashMap<String, String>();
                         map.put(KEY_PERSON_ID, uid);
                         map.put(KEY_PSEUDO,pseudo);
-                        System.out.println("------------------------------------------------"+pseudo);
                         personList.add(map);
                     }
                 }
@@ -127,7 +123,6 @@ public class ListParticipateActivity extends AppCompatActivity {
                     String personId = ((TextView) view.findViewById(R.id.textView)).getText().toString();
                     Intent intent = new Intent(getApplicationContext(),DepenseActivity.class);
                     intent.putExtra(KEY_PERSON_ID,personId);
-                    System.out.println("CHOICE PERSON In LIST ID ------------------"+personId);
                     startActivityForResult(intent, 20);
                     finish();
                 } else {

@@ -22,8 +22,8 @@ public class AddAccountActivity extends AppCompatActivity {
     private static final String KEY_TiTLE = "title";
     private static final String KEY_DESC = "description";
     private static final String KEY_DEV = "device";
-    private static final String KEY_PID= "pid";
-    private static final String BASE_URL = "https://pw.lacl.fr/~u21402914/ProjetAndroid/";
+    private static final String KEY_PERSON_ID= "uid";
+    private static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
     private static String STRING_EMPTY = "";
 
     private EditText accountTitleEditText;
@@ -34,6 +34,7 @@ public class AddAccountActivity extends AppCompatActivity {
     private String accountTitle;
     private String accountDesc;
     private String accountDev;
+    private String uid;
 
     private Button addButton;
     private int success;
@@ -70,7 +71,7 @@ public class AddAccountActivity extends AppCompatActivity {
             accountTitle = accountTitleEditText.getText().toString();
             accountDesc = accountDescEditText.getText().toString();
             accountDev = accountDevEditText.getText().toString();
-
+            uid =getIntent().getStringExtra(KEY_PERSON_ID);
             new AddAccountAsynTask().execute();
         } else {
             Toast.makeText(AddAccountActivity.this, "One or more fields left empty!", Toast.LENGTH_LONG).show();
@@ -95,6 +96,7 @@ public class AddAccountActivity extends AppCompatActivity {
             httpParams.put(KEY_TiTLE, accountTitle);
             httpParams.put(KEY_DESC, accountDesc);
             httpParams.put(KEY_DEV, accountDev);
+            httpParams.put(KEY_PERSON_ID,uid);
             JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "add_account.php", "POST", httpParams);
             try {
                 success = jsonObject.getInt(KEY_SUCCESS);
