@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class AddUserActivity extends AppCompatActivity {
     private static final String KEY_SUCCESS = "success", KEY_PSEUDO ="pseudo",KEY_MDP = "mdp",STRING_EMPTY = "";
-    private static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
+    private static final String BASE_URL = "https://pw.lacl.fr/~u21402914/ProjetAndroid/";
     private String pseudo, mdp;
     private EditText pseudoUser, mdpUser, mdp2User;
     private Button add;
@@ -81,6 +81,7 @@ public class AddUserActivity extends AppCompatActivity {
             Map<String, String> httpParams = new HashMap<>();
             httpParams.put(KEY_PSEUDO, pseudo);
             httpParams.put(KEY_MDP,mdp);
+            System.out.println("ppppppppppppppppppppppppppppppppppppppppppppppppppppppp "+pseudo+ "    "+mdp);
             JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "add_user.php", "POST", httpParams);
             try {
                 success = jsonObject.getInt(KEY_SUCCESS);
