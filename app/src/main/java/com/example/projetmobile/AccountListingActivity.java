@@ -61,10 +61,8 @@ public class AccountListingActivity extends AppCompatActivity {
             Map<String, String> httpParams = new HashMap<>();
             String personId = getIntent().getStringExtra(KEY_PERSON_ID);
             httpParams.put(KEY_PERSON_ID,personId);
-            System.out.println("ACCOUNTLISTINGACTIVITY        PERSON ID ------------------"+personId);
             JSONObject jsonObject = httpJsonParser.makeHttpRequest(
                     BASE_URL + "select_person_all_account.php", "GET",httpParams);
-            System.out.println(jsonObject+"-------------------------------------------------");
             if (jsonObject == null) {
                 System.out.println("JSON NULL");
             }
@@ -102,15 +100,15 @@ public class AccountListingActivity extends AppCompatActivity {
 
         private void populateAccountList() {
             ListAdapter adapter = new SimpleAdapter(
-                    AccountListingActivity.this, accountList, R.layout.list_item2, new String[]{
-                    KEY_ACCOUNT_ID, KEY_TITLE}, new int[]{R.id.accountId, R.id.accountTitle});
+                    AccountListingActivity.this, accountList, R.layout.list_item, new String[]{
+                    KEY_ACCOUNT_ID, KEY_TITLE}, new int[]{R.id.textView, R.id.textView1});
             accountListView.setAdapter(adapter);
 
             accountListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
-                        String accountId = ((TextView) view.findViewById(R.id.accountId)).getText().toString();
+                        String accountId = ((TextView) view.findViewById(R.id.textView)).getText().toString();
                         Intent intent = new Intent(getApplicationContext(), ListParticipateActivity.class);
                         intent.putExtra(KEY_ACCOUNT_ID, accountId);
                         startActivityForResult(intent, 20);

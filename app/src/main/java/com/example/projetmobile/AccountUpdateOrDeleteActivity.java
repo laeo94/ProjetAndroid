@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -23,6 +26,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
@@ -54,7 +58,10 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
     private ArrayList<HashMap<String, String>> personList;
     private ListView personListView;
-
+    private EditText rech ;
+    private String rechstr;
+    private String uid;
+    private String userpseudo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +72,9 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
         titleResult = findViewById(R.id.accountId);
         devResult =  findViewById(R.id.accountDev);
         descResult = findViewById(R.id.accountDesc);
-        personListView = findViewById(R.id.personList);
+        //Partie recherche
+        personListView = findViewById(R.id.listperson);
+        rech =findViewById(R.id.rech);
         new SelectAccountDetailAsynTask().execute();
         deleteButton = findViewById(R.id.btnDelete);
         deleteButton.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +88,6 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
-                    System.out.println("-------------------------------------------------h");
                     updateAccount();
                 } else {
                     Toast.makeText(AccountUpdateOrDeleteActivity.this,
@@ -89,6 +97,24 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
 
             }
         });
+        rech.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        rechstr =rech.getText().toString();
+                        new FoundUserAsynTask().execute();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
     }
     /**
      * Le but de AsynTask est de recupere la ligne correspondant dans la base et d'affiche sur les EditText.
@@ -170,16 +196,13 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
         }
         @Override
         protected String doInBackground(String... strings) {
-            System.out.println("-------------------------------------------------haaa");
             HttpJsonParser httpJsonParser = new HttpJsonParser();
             Map<String, String> httpParams = new HashMap<>();
             httpParams.put(KEY_ACCOUNT_ID, accountId);
             httpParams.put(KEY_TITLE, titleaccount);
             httpParams.put(KEY_DESC, desc);
             httpParams.put(KEY_DEV,dev);
-            System.out.println("ppppppppppppppppppppppppppppppppppp"+desc);
             JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "update_account.php", "POST", httpParams);
-            System.out.println("-------------------------------------------------haaaa");
             try {
                 success = jsonObject.getInt(KEY_SUCCESS);
             }catch (JSONException e) {
@@ -270,6 +293,117 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
 
                     } else {
                         Toast.makeText(AccountUpdateOrDeleteActivity.this, "Some error occurred while deleting account", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }
+    }
+
+    private class FoundUserAsynTask extends AsyncTask<String, String, String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            HttpJsonParser httpJsonParser = new HttpJsonParser();
+            Map<String, String> httpParams = new HashMap<>();
+            httpParams.put("rech", rechstr);
+            JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "found_user.php", "GET", httpParams);
+            try {
+                int success = jsonObject.getInt(KEY_SUCCESS);
+                JSONArray person;
+                if (success == 1) {
+                    personList = new ArrayList<>();
+                    person= jsonObject.getJSONArray(KEY_DATA);
+                    for (int i = 0; i < person.length(); i++) {
+                        JSONObject users  = person.getJSONObject(i);
+                        String userId = users.getString(KEY_PERSON_ID);
+                        String pseudo= users.getString(KEY_PSEUDO);
+                        HashMap<String, String> map = new HashMap<String, String>();
+                        map.put(KEY_PERSON_ID, userId);
+                        map.put(KEY_PSEUDO,pseudo);
+                        personList.add(map);
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        protected void onPostExecute(String result) {
+
+            pDialog.dismiss();
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    populateRechearchList();
+                }
+            });
+        }
+
+        private void populateRechearchList() {
+            ListAdapter adapter = new SimpleAdapter(
+                    AccountUpdateOrDeleteActivity.this, personList, R.layout.list_item, new String[]{
+                    KEY_PERSON_ID, KEY_PSEUDO}, new int[]{R.id.textView, R.id.textView1});
+            personListView.setAdapter(adapter);
+
+            personListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    uid = ((TextView) findViewById(R.id.textView)).getText().toString();
+                    userpseudo = ((TextView) findViewById(R.id.textView1)).getText().toString();
+                   confirmAdd();
+                }
+            });
+        }
+
+    }
+    private void confirmAdd() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AccountUpdateOrDeleteActivity.this);
+        alertDialogBuilder.setMessage("Are you sure, you want to add "+userpseudo+" ?");
+        alertDialogBuilder.setPositiveButton("Add",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
+                            //If the user confirms deletion, execute DeleteAccountAsyncTask
+                            new AccountUpdateOrDeleteActivity.AddPersonAsyncTask().execute();
+                        } else {
+                            Toast.makeText(AccountUpdateOrDeleteActivity.this,
+                                    "Unable to connect to internet",
+                                    Toast.LENGTH_LONG).show();
+
+                        }
+                    }
+                });
+
+        alertDialogBuilder.setNegativeButton("Cancel", null);
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+    private class AddPersonAsyncTask extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... strings) {
+            HttpJsonParser httpJsonParser = new HttpJsonParser();
+            Map<String, String> httpParams = new HashMap<>();
+            httpParams.put(KEY_PERSON_ID, uid);
+            httpParams.put(KEY_ACCOUNT_ID,accountId);
+            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+uid+" "+accountId);
+            JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "add_user_participations.php", "POST", httpParams);
+            try {
+                success = jsonObject.getInt(KEY_SUCCESS);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+        protected void onPostExecute(String result) {
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    if (success == 1) {
+                        //Display success message
+                        Toast.makeText(AccountUpdateOrDeleteActivity.this, userpseudo+" has been added", Toast.LENGTH_LONG).show();
+
+                    } else {
+                        Toast.makeText(AccountUpdateOrDeleteActivity.this, "Some error occurred while deleting person", Toast.LENGTH_LONG).show();
                     }
                 }
             });
