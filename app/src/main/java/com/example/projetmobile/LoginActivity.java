@@ -105,10 +105,12 @@ public class LoginActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 public void run() {
                    if(success ==1) login();
-                   if(success ==2){
-                        Toast.makeText(LoginActivity.this, "mdp not valide retry", Toast.LENGTH_LONG).show();
-
-                    }
+                   if(success ==2) {
+                       Toast.makeText(LoginActivity.this, "mdp not valide retry", Toast.LENGTH_LONG).show();
+                   }
+                   if(success==3){
+                       Toast.makeText(LoginActivity.this, "pseudo not valide retry", Toast.LENGTH_LONG).show();
+                   }
                 }
             });
         }

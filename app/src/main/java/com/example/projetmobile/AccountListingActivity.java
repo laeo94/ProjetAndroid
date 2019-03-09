@@ -111,7 +111,8 @@ public class AccountListingActivity extends AppCompatActivity {
                         String accountId = ((TextView) view.findViewById(R.id.textView)).getText().toString();
                         Intent intent = new Intent(getApplicationContext(), ListParticipateActivity.class);
                         intent.putExtra(KEY_ACCOUNT_ID, accountId);
-                        startActivityForResult(intent, 20);
+                        startActivityForResult(intent, 10);
+
 
                     } else {
                         Toast.makeText(AccountListingActivity.this, "Unable to connect to internet", Toast.LENGTH_LONG).show();
@@ -126,13 +127,10 @@ public class AccountListingActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode,Intent data){
         super.onActivityResult(requestCode,resultCode,data);
-        if (resultCode == 20) {
-            // If the result code is 20 that means that
-            // the user has deleted/updated the movie.
-            // So refresh the movie listing
-            Intent intent = getIntent();
-            finish();
-            startActivity(intent);
+        if(resultCode==20){
+            Intent refresh = new Intent(this, AccountListingActivity.class);
+            startActivity(refresh);
+            this.finish();
         }
     }
 }

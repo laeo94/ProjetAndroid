@@ -40,16 +40,17 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
     private static final String KEY_PERSON_ID ="uid";
     private static final String KEY_PSEUDO ="pseudo";
     private static final String KEY_DEV = "device";
+    private static final String KEY_SOMME = "somme";
 
     private static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
 
     //les String utilise pour recupere et modifie
-    private String accountId , pseudo ,titleaccount,desc,dev;
+    private String accountId ,titleaccount,desc,dev, sommestr;
     //On recupere les donnée de la base de donnée et avec possiblite de modifie
     private EditText titleResult;
     private EditText descResult;
     private EditText devResult;
-
+    private TextView somme;
     //Partie Button
     private Button deleteButton;
     private Button updateButton;
@@ -72,6 +73,7 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
         titleResult = findViewById(R.id.accountId);
         devResult =  findViewById(R.id.accountDev);
         descResult = findViewById(R.id.accountDesc);
+        somme =findViewById(R.id.somme);
         //Partie recherche
         personListView = findViewById(R.id.listperson);
         rech =findViewById(R.id.rech);
@@ -145,6 +147,7 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
                     titleaccount= account.getString(KEY_TITLE);
                     desc = account.getString(KEY_DESC);
                     dev = account.getString(KEY_DEV);
+                    sommestr=account.getString(KEY_SOMME);
                 }
             }catch (JSONException e) {
                 e.printStackTrace();
@@ -159,6 +162,7 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
                     titleResult.setText(titleaccount);
                     devResult.setText(dev);
                     descResult.setText(desc);
+                    somme.setText(sommestr+ " "+dev);
 
 
                 }
@@ -287,8 +291,6 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
                         //Display success message
                         Toast.makeText(AccountUpdateOrDeleteActivity.this, "Account Deleted", Toast.LENGTH_LONG).show();
                         Intent i = getIntent();
-                        //send result code 20 to notify about account deletion
-                        setResult(20, i);
                         finish();
 
                     } else {
@@ -401,7 +403,6 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
                     if (success == 1) {
                         //Display success message
                         Toast.makeText(AccountUpdateOrDeleteActivity.this, userpseudo+" has been added", Toast.LENGTH_LONG).show();
-
                     } else {
                         Toast.makeText(AccountUpdateOrDeleteActivity.this, "Some error occurred while deleting person", Toast.LENGTH_LONG).show();
                     }

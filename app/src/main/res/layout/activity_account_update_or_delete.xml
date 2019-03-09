@@ -109,8 +109,8 @@
 
     <EditText
         android:id="@+id/rech"
-        android:layout_width="264dp"
-        android:layout_height="43dp"
+        android:layout_width="274dp"
+        android:layout_height="58dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="76dp"
         android:layout_marginEnd="8dp"
@@ -123,14 +123,38 @@
 
     <ListView
         android:id="@+id/listperson"
-        android:layout_width="378dp"
-        android:layout_height="250dp"
+        android:layout_width="370dp"
+        android:layout_height="187dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintHorizontal_bias="0.32"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rech" />
+
+    <TextView
+        android:id="@+id/somme"
+        android:layout_width="248dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/Total"
+        android:layout_width="103dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:text="Spent : "
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/somme"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 </android.support.constraint.ConstraintLayout>

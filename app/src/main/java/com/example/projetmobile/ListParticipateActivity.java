@@ -106,7 +106,7 @@ public class ListParticipateActivity extends AppCompatActivity {
 
     //Updating parsed JSON data into ListView
     private void populatePersonList() {
-        ListAdapter adapter = new SimpleAdapter(
+        final ListAdapter adapter = new SimpleAdapter(
                 ListParticipateActivity.this, personList,
                 R.layout.list_item, new String[]{KEY_PERSON_ID,
                 KEY_PSEUDO},
@@ -121,8 +121,11 @@ public class ListParticipateActivity extends AppCompatActivity {
                 //Check for network connectivity
                 if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
                     String personId = ((TextView) view.findViewById(R.id.textView)).getText().toString();
+                    String pseudo = ((TextView) view.findViewById(R.id.textView1)).getText().toString();
                     Intent intent = new Intent(getApplicationContext(),DepenseActivity.class);
                     intent.putExtra(KEY_PERSON_ID,personId);
+                    intent.putExtra(KEY_PSEUDO,pseudo);
+                    intent.putExtra(KEY_ACCOUNT_ID, accountId);
                     startActivityForResult(intent, 20);
                     finish();
                 } else {
@@ -138,5 +141,6 @@ public class ListParticipateActivity extends AppCompatActivity {
 
 
     }
+
 
 }
