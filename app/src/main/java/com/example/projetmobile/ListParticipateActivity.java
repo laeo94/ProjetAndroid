@@ -30,7 +30,7 @@ public class ListParticipateActivity extends AppCompatActivity {
     private static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
     private ArrayList<HashMap<String, String>> personList;
     private ListView personListView;
-    private String accountId;
+    private String accountId, personfrom;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +38,7 @@ public class ListParticipateActivity extends AppCompatActivity {
         personListView = findViewById(R.id.personList);
         Intent intent = getIntent();
         accountId = intent.getStringExtra(KEY_ACCOUNT_ID);
+        personfrom =intent.getStringExtra(KEY_PERSON_ID);
         Button info;
         info = findViewById(R.id.Information);
         info.setOnClickListener(new View.OnClickListener() {
@@ -120,10 +121,11 @@ public class ListParticipateActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //Check for network connectivity
                 if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
-                    String personId = ((TextView) view.findViewById(R.id.textView)).getText().toString();
+                    String personto = ((TextView) view.findViewById(R.id.textView)).getText().toString();
                     String pseudo = ((TextView) view.findViewById(R.id.textView1)).getText().toString();
                     Intent intent = new Intent(getApplicationContext(),DepenseActivity.class);
-                    intent.putExtra(KEY_PERSON_ID,personId);
+                    intent.putExtra("idto",personto);
+                    intent.putExtra("idfrom",personfrom);
                     intent.putExtra(KEY_PSEUDO,pseudo);
                     intent.putExtra(KEY_ACCOUNT_ID, accountId);
                     startActivityForResult(intent, 20);

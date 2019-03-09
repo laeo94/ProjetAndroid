@@ -30,11 +30,12 @@ public class DepenseActivity extends AppCompatActivity {
     private static final String KEY_DATA = "data";
     private static final String KEY_ACCOUNT_ID = "aid";
     private static final String KEY_PSEUDO ="pseudo";
-    private static final String KEY_PERSON_ID ="uid";
     private static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
     private int success;
-    private String personid,pseudostr, accountId;
+    private String personfrom,pseudoto,personto, accountId,sommestr;
     private TextView pseudo;
+    private EditText somme;
+    private Button add;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,11 +43,19 @@ public class DepenseActivity extends AppCompatActivity {
         Button supp = findViewById(R.id.supp);
         Intent intent = getIntent();
         pseudo=findViewById(R.id.pseudo);
-        personid = intent.getStringExtra(KEY_PERSON_ID);
+        personfrom= intent.getStringExtra("idfrom");
         accountId=intent.getStringExtra(KEY_ACCOUNT_ID);
-        pseudostr=intent.getStringExtra(KEY_PSEUDO);
-        pseudo.setText(pseudostr);
-        //new FetchPersonAsyncTask().execute();
+        pseudoto=intent.getStringExtra(KEY_PSEUDO);
+        personto =intent.getStringExtra("idto");
+        pseudo.setText(pseudoto);
+        somme =findViewById(R.id.somme);
+        add =findViewById(R.id.add);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                confirmAdd();
+            }
+        });
         supp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,7 +65,7 @@ public class DepenseActivity extends AppCompatActivity {
     }
     private void confirmDelete() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DepenseActivity.this);
-        alertDialogBuilder.setMessage("Are you sure, you want to delete "+pseudostr+" from this account?");
+        alertDialogBuilder.setMessage("Are you sure, you want to delete "+pseudoto+" from this account?");
         alertDialogBuilder.setPositiveButton("Delete",
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -83,7 +92,7 @@ public class DepenseActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             HttpJsonParser httpJsonParser = new HttpJsonParser();
             Map<String, String> httpParams = new HashMap<>();
-            httpParams.put(KEY_PERSON_ID, personid);
+            httpParams.put("idto", personto);
             httpParams.put(KEY_ACCOUNT_ID,accountId);
             JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "delete_person_participate.php", "POST", httpParams);
             try {
@@ -112,6 +121,66 @@ public class DepenseActivity extends AppCompatActivity {
         }
     }
 
+    private void confirmAdd() {
+        if (!STRING_EMPTY.equals(somme.getText().toString())) {
+            sommestr=somme.getText().toString();
+            System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"+sommestr);
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DepenseActivity.this);
+            alertDialogBuilder.setMessage("Are you sure, you want to add "+pseudoto+" ?");
+            alertDialogBuilder.setPositiveButton("Add",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
+                                new DepenseActivity.AddDepenseAsyncTask().execute();
+                            } else {
+                                Toast.makeText(DepenseActivity.this,
+                                        "Unable to connect to internet",
+                                        Toast.LENGTH_LONG).show();
 
+                            }
+                        }
+                    });
+
+            alertDialogBuilder.setNegativeButton("Cancel", null);
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+        } else {
+            Toast.makeText(DepenseActivity.this, "One or more fields left empty!", Toast.LENGTH_LONG).show();
+
+        }
+    }
+    private class AddDepenseAsyncTask extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... strings) {
+            HttpJsonParser httpJsonParser = new HttpJsonParser();
+            Map<String, String> httpParams = new HashMap<>();
+            httpParams.put(KEY_ACCOUNT_ID,accountId);
+            httpParams.put("idfrom", personfrom);
+            httpParams.put("idto", personto);
+            httpParams.put("somme",sommestr);
+            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa pour "+personto +" from "+personfrom+ " somme "+sommestr+ " account "+accountId);
+            JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "add_depense.php", "POST", httpParams);
+            try {
+                success = jsonObject.getInt(KEY_SUCCESS);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+        protected void onPostExecute(String result) {
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    if (success == 1) {
+                        //Display success message
+                        Toast.makeText(DepenseActivity.this, sommestr+" to "+pseudoto+" has been added", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(DepenseActivity.this, "Some error occurred while add expenses to "+pseudoto, Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }
+    }
 
 }

@@ -32,12 +32,13 @@ public class AccountListingActivity extends AppCompatActivity {
     private ArrayList<HashMap<String, String>> accountList;
     private ListView accountListView;
     private ProgressDialog pDialog;
-
+    private String personId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_listing);
         accountListView = findViewById(R.id.accountList);
+        personId = getIntent().getStringExtra(KEY_PERSON_ID);
         new AllSelectAccountAsynTask().execute();
     }
 
@@ -59,7 +60,6 @@ public class AccountListingActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             HttpJsonParser httpJsonParser = new HttpJsonParser();
             Map<String, String> httpParams = new HashMap<>();
-            String personId = getIntent().getStringExtra(KEY_PERSON_ID);
             httpParams.put(KEY_PERSON_ID,personId);
             JSONObject jsonObject = httpJsonParser.makeHttpRequest(
                     BASE_URL + "select_person_all_account.php", "GET",httpParams);
@@ -111,6 +111,7 @@ public class AccountListingActivity extends AppCompatActivity {
                         String accountId = ((TextView) view.findViewById(R.id.textView)).getText().toString();
                         Intent intent = new Intent(getApplicationContext(), ListParticipateActivity.class);
                         intent.putExtra(KEY_ACCOUNT_ID, accountId);
+                        intent.putExtra(KEY_PERSON_ID,personId);
                         startActivityForResult(intent, 10);
 
 
