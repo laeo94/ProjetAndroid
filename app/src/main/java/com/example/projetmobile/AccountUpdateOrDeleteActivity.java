@@ -162,18 +162,19 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
                     titleResult.setText(titleaccount);
                     devResult.setText(dev);
                     descResult.setText(desc);
-                    somme.setText(sommestr+ " "+dev);
+                    if(sommestr=="null"){
+                        somme.setText(0 + " " + dev);
+                    }else {
+                        somme.setText(sommestr + " " + dev);
 
-
+                    }
                 }
             });
         }
 
     }
     private void updateAccount(){
-        System.out.println("-------------------------------------------------ha");
         if(!STRING_EMPTY.equals(titleResult.getText().toString()) && !STRING_EMPTY.equals(devResult.getText().toString())) {
-            System.out.println("-------------------------------------------------haa");
           titleaccount =titleResult.getText().toString();
           desc = descResult.getText().toString();
           dev = devResult.getText().toString();
@@ -388,7 +389,6 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
             Map<String, String> httpParams = new HashMap<>();
             httpParams.put(KEY_PERSON_ID, uid);
             httpParams.put(KEY_ACCOUNT_ID,accountId);
-            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+uid+" "+accountId);
             JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "add_user_participations.php", "POST", httpParams);
             try {
                 success = jsonObject.getInt(KEY_SUCCESS);

@@ -32,9 +32,9 @@ public class DepenseActivity extends AppCompatActivity {
     private static final String KEY_PSEUDO ="pseudo";
     private static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
     private int success;
-    private String personfrom,pseudoto,personto, accountId,sommestr;
+    private String personfrom,pseudoto,personto, accountId,sommestr,detailstr;
     private TextView pseudo;
-    private EditText somme;
+    private EditText somme, detail;
     private Button add;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +49,7 @@ public class DepenseActivity extends AppCompatActivity {
         personto =intent.getStringExtra("idto");
         pseudo.setText(pseudoto);
         somme =findViewById(R.id.somme);
+        detail =findViewById(R.id.detail);
         add =findViewById(R.id.add);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,9 +123,9 @@ public class DepenseActivity extends AppCompatActivity {
     }
 
     private void confirmAdd() {
-        if (!STRING_EMPTY.equals(somme.getText().toString())) {
+        if (!STRING_EMPTY.equals(somme.getText().toString()) &&!STRING_EMPTY.equals(detail.getText().toString())) {
             sommestr=somme.getText().toString();
-            System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"+sommestr);
+            detailstr = detail.getText().toString();
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DepenseActivity.this);
             alertDialogBuilder.setMessage("Are you sure, you want to add "+pseudoto+" ?");
             alertDialogBuilder.setPositiveButton("Add",
@@ -160,7 +161,7 @@ public class DepenseActivity extends AppCompatActivity {
             httpParams.put("idfrom", personfrom);
             httpParams.put("idto", personto);
             httpParams.put("somme",sommestr);
-            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa pour "+personto +" from "+personfrom+ " somme "+sommestr+ " account "+accountId);
+            httpParams.put("detail",detailstr);
             JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "add_depense.php", "POST", httpParams);
             try {
                 success = jsonObject.getInt(KEY_SUCCESS);
@@ -175,6 +176,8 @@ public class DepenseActivity extends AppCompatActivity {
                     if (success == 1) {
                         //Display success message
                         Toast.makeText(DepenseActivity.this, sommestr+" to "+pseudoto+" has been added", Toast.LENGTH_LONG).show();
+                        somme.setText("");
+                        detail.setText("");
                     } else {
                         Toast.makeText(DepenseActivity.this, "Some error occurred while add expenses to "+pseudoto, Toast.LENGTH_LONG).show();
                     }
