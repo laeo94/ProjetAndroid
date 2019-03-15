@@ -5,13 +5,18 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,12 +41,17 @@ public class DepenseActivity extends AppCompatActivity {
     private TextView pseudo;
     private EditText somme, detail;
     private Button add;
+    private ArrayList<HashMap<String, String>> depenseList;
+    private RecyclerView depenseListView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         setContentView(R.layout.activity_depense);
         Button supp = findViewById(R.id.supp);
         Intent intent = getIntent();
+        depenseListView = findViewById(R.id.recyclerView);
         pseudo=findViewById(R.id.pseudo);
         personfrom= intent.getStringExtra("idfrom");
         accountId=intent.getStringExtra(KEY_ACCOUNT_ID);
@@ -63,6 +73,64 @@ public class DepenseActivity extends AppCompatActivity {
                 confirmDelete();
             }
         });
+        new AllSelectDepenseAsynTask().execute();
+    }
+    private class AllSelectDepenseAsynTask extends AsyncTask<String, String, String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            HttpJsonParser httpJsonParser = new HttpJsonParser();
+            Map<String, String> httpParams = new HashMap<>();
+            httpParams.put("aid",accountId);
+            httpParams.put("idto",personto);
+            httpParams.put("idfrom",personfrom);
+            JSONObject jsonObject = httpJsonParser.makeHttpRequest(
+                    BASE_URL + "select_all_depense_user.php", "GET",httpParams);
+            if (jsonObject == null) {
+                System.out.println("JSON NULL");
+            }
+            try {
+                int success = jsonObject.getInt(KEY_SUCCESS);
+                JSONArray depense;
+                if (success == 1) {
+                    depenseList = new ArrayList<>();
+                    depense= jsonObject.getJSONArray(KEY_DATA);
+                    for (int i = 0; i < depense.length(); i++) {
+                        JSONObject depenses  = depense.getJSONObject(i);
+                        String did = depenses.getString("did");
+                        String somme =depenses.getString("somme");
+                        String statut= depenses.getString("statut");
+                        String detail =depenses.getString("detail");
+                        String idto =depenses.getString("idto");
+                        HashMap<String, String> map = new HashMap<String, String>();
+                        map.put("did",did);
+                        map.put("statut",statut);
+                        map.put("somme",somme);
+                        map.put("detail",detail);
+                        map.put("idto",idto);
+                        depenseList.add(map);
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        protected void onPostExecute(String result) {
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    populateAccountList();
+                }
+            });
+        }
+
+        private void populateAccountList() {
+            depenseListView.setLayoutManager((new LinearLayoutManager(getApplicationContext())));
+            depenseListView.setAdapter(new MyAdapter(depenseList,personfrom));
+
+
+        }
+
     }
     private void confirmDelete() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DepenseActivity.this);
@@ -185,5 +253,4 @@ public class DepenseActivity extends AppCompatActivity {
             });
         }
     }
-
 }
