@@ -30,45 +30,24 @@ import java.util.List;
 import java.util.Map;
 
 public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
-    //La base de donnée
-    private static final String STRING_EMPTY = "";
-    private static final String KEY_SUCCESS = "success";
-    private static final String KEY_DATA = "data";
-    private static final String KEY_ACCOUNT_ID = "aid";
-    private static final String KEY_TITLE = "title";
-    private static final String KEY_DESC = "description";
-    private static final String KEY_PERSON_ID ="uid";
-    private static final String KEY_PSEUDO ="pseudo";
-    private static final String KEY_DEV = "device";
-    private static final String KEY_SOMME = "somme";
-
-    private static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
-
-    //les String utilise pour recupere et modifie
     private String accountId ,titleaccount,desc,dev, sommestr;
     //On recupere les donnée de la base de donnée et avec possiblite de modifie
-    private EditText titleResult;
-    private EditText descResult;
-    private EditText devResult;
+    private EditText titleResult, descResult, devResult, rech;
     private TextView somme;
     //Partie Button
-    private Button deleteButton;
-    private Button updateButton;
-
+    private Button deleteButton, updateButton;
     private int success;
     private ProgressDialog pDialog;
     private ArrayList<HashMap<String, String>> personList;
     private ListView personListView;
-    private EditText rech ;
-    private String rechstr;
-    private String uid;
-    private String userpseudo;
+    private String rechstr,uid,userpseudo,userId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_update_or_delete);
         Intent intent = getIntent();
-        accountId = intent.getStringExtra(KEY_ACCOUNT_ID);
+        accountId = intent.getStringExtra(MainActivity.KEY_ACCOUNT_ID);
         // Partie Selection
         titleResult = findViewById(R.id.accountId);
         devResult =  findViewById(R.id.accountDev);
@@ -136,18 +115,18 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             HttpJsonParser httpJsonParser = new HttpJsonParser();
             Map<String, String> httpParams = new HashMap<>();
-            httpParams.put(KEY_ACCOUNT_ID, accountId);
-            JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "get_account.php", "GET", httpParams);
+            httpParams.put(MainActivity.KEY_ACCOUNT_ID, accountId);
+            JSONObject jsonObject = httpJsonParser.makeHttpRequest(MainActivity.BASE_URL + "get_account.php", "GET", httpParams);
             System.out.println("accountId");
             try {
-                int success = jsonObject.getInt(KEY_SUCCESS);
+                int success = jsonObject.getInt(MainActivity.KEY_SUCCESS);
                 JSONObject account;
                 if (success == 1) {
-                    account = jsonObject.getJSONObject(KEY_DATA);
-                    titleaccount= account.getString(KEY_TITLE);
-                    desc = account.getString(KEY_DESC);
-                    dev = account.getString(KEY_DEV);
-                    sommestr=account.getString(KEY_SOMME);
+                    account = jsonObject.getJSONObject(MainActivity.KEY_DATA);
+                    titleaccount= account.getString(MainActivity.KEY_TITLE);
+                    desc = account.getString(MainActivity.KEY_DESC);
+                    dev = account.getString(MainActivity.KEY_DEV);
+                    sommestr=account.getString(MainActivity.KEY_SOMME);
                 }
             }catch (JSONException e) {
                 e.printStackTrace();
@@ -174,7 +153,7 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
 
     }
     private void updateAccount(){
-        if(!STRING_EMPTY.equals(titleResult.getText().toString()) && !STRING_EMPTY.equals(devResult.getText().toString())) {
+        if(!titleResult.getText().toString().isEmpty() &&!devResult.getText().toString().isEmpty()) {
           titleaccount =titleResult.getText().toString();
           desc = descResult.getText().toString();
           dev = devResult.getText().toString();
@@ -203,13 +182,13 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             HttpJsonParser httpJsonParser = new HttpJsonParser();
             Map<String, String> httpParams = new HashMap<>();
-            httpParams.put(KEY_ACCOUNT_ID, accountId);
-            httpParams.put(KEY_TITLE, titleaccount);
-            httpParams.put(KEY_DESC, desc);
-            httpParams.put(KEY_DEV,dev);
-            JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "update_account.php", "POST", httpParams);
+            httpParams.put(MainActivity.KEY_ACCOUNT_ID, accountId);
+            httpParams.put(MainActivity.KEY_TITLE, titleaccount);
+            httpParams.put(MainActivity.KEY_DESC, desc);
+            httpParams.put(MainActivity.KEY_DEV,dev);
+            JSONObject jsonObject = httpJsonParser.makeHttpRequest(MainActivity.BASE_URL + "update_account.php", "POST", httpParams);
             try {
-                success = jsonObject.getInt(KEY_SUCCESS);
+                success = jsonObject.getInt(MainActivity.KEY_SUCCESS);
             }catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -275,10 +254,10 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             HttpJsonParser httpJsonParser = new HttpJsonParser();
             Map<String, String> httpParams = new HashMap<>();
-            httpParams.put(KEY_ACCOUNT_ID, accountId);
-            JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "delete_account.php", "POST", httpParams);
+            httpParams.put(MainActivity.KEY_ACCOUNT_ID, accountId);
+            JSONObject jsonObject = httpJsonParser.makeHttpRequest(MainActivity.BASE_URL + "delete_account.php", "POST", httpParams);
             try {
-                success = jsonObject.getInt(KEY_SUCCESS);
+                success = jsonObject.getInt(MainActivity.KEY_SUCCESS);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -308,20 +287,20 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
             HttpJsonParser httpJsonParser = new HttpJsonParser();
             Map<String, String> httpParams = new HashMap<>();
             httpParams.put("rech", rechstr);
-            JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "found_user.php", "GET", httpParams);
+            JSONObject jsonObject = httpJsonParser.makeHttpRequest(MainActivity.BASE_URL + "found_user.php", "GET", httpParams);
             try {
-                int success = jsonObject.getInt(KEY_SUCCESS);
+                int success = jsonObject.getInt(MainActivity.KEY_SUCCESS);
                 JSONArray person;
                 if (success == 1) {
                     personList = new ArrayList<>();
-                    person= jsonObject.getJSONArray(KEY_DATA);
+                    person= jsonObject.getJSONArray(MainActivity.KEY_DATA);
                     for (int i = 0; i < person.length(); i++) {
                         JSONObject users  = person.getJSONObject(i);
-                        String userId = users.getString(KEY_PERSON_ID);
-                        String pseudo= users.getString(KEY_PSEUDO);
+                        userId = users.getString(MainActivity.KEY_PERSON_ID);
+                        String pseudo= users.getString(MainActivity.KEY_PSEUDO);
                         HashMap<String, String> map = new HashMap<String, String>();
-                        map.put(KEY_PERSON_ID, userId);
-                        map.put(KEY_PSEUDO,pseudo);
+                        map.put(MainActivity.KEY_PERSON_ID, userId);
+                        map.put(MainActivity.KEY_PSEUDO,pseudo);
                         personList.add(map);
                     }
                 }
@@ -344,7 +323,7 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
         private void populateRechearchList() {
             ListAdapter adapter = new SimpleAdapter(
                     AccountUpdateOrDeleteActivity.this, personList, R.layout.list_item, new String[]{
-                    KEY_PERSON_ID, KEY_PSEUDO}, new int[]{R.id.textView, R.id.textView1});
+                    MainActivity.KEY_PERSON_ID, MainActivity.KEY_PSEUDO}, new int[]{R.id.textView, R.id.textView1});
             personListView.setAdapter(adapter);
 
             personListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -387,11 +366,12 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             HttpJsonParser httpJsonParser = new HttpJsonParser();
             Map<String, String> httpParams = new HashMap<>();
-            httpParams.put(KEY_PERSON_ID, uid);
-            httpParams.put(KEY_ACCOUNT_ID,accountId);
-            JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "add_user_participations.php", "POST", httpParams);
+            httpParams.put(MainActivity.KEY_PERSON_ID, userId);
+            httpParams.put(MainActivity.KEY_ACCOUNT_ID,accountId);
+
+            JSONObject jsonObject = httpJsonParser.makeHttpRequest(MainActivity.BASE_URL + "add_user_participations.php", "POST", httpParams);
             try {
-                success = jsonObject.getInt(KEY_SUCCESS);
+                success = jsonObject.getInt(MainActivity.KEY_SUCCESS);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

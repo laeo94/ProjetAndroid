@@ -8,6 +8,18 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
+    public static final String KEY_SUCCESS = "success";
+    public static final String KEY_DATA = "data";
+    public static final String KEY_PERSON_ID= "uid";
+    public static final String KEY_PSEUDO = "pseudo";
+    public static final String KEY_MDP = "mdp";
+    public static final String KEY_ACCOUNT_ID = "aid";
+    public static final String KEY_TITLE = "title";
+    public static final String KEY_DESC = "description";
+    public static final String KEY_DEV = "device";
+    public static final String KEY_SOMME = "somme";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,14 +30,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Si la connexion avec internet fonctionne
               if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
-                    Intent i = new Intent(getApplicationContext(),
-                            LoginActivity.class);
+                    Intent i = new Intent(getApplicationContext(),LoginActivity.class);
                     startActivity(i);
                 } else {
-                    //Display error message if not connected to internet
-                    Toast.makeText(MainActivity.this,
-                            "Unable to connect to internet",
-                            Toast.LENGTH_LONG).show();
+                    //Message d'erreur
+                    Toast.makeText(MainActivity.this, "Unable to connect to internet", Toast.LENGTH_LONG).show();
                 }
             }
         });

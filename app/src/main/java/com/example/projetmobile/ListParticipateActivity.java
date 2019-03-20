@@ -69,6 +69,7 @@ public class ListParticipateActivity extends AppCompatActivity {
             HttpJsonParser httpJsonParser = new HttpJsonParser();
             Map<String, String> httpParams = new HashMap<>();
             httpParams.put(KEY_ACCOUNT_ID, accountId);
+            httpParams.put(KEY_PERSON_ID, personfrom);
             JSONObject jsonObject = httpJsonParser.makeHttpRequest(
                     BASE_URL + "select_all_person_participate.php", "GET", httpParams);
             if (jsonObject == null) {

@@ -17,30 +17,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AccountHomeActivity extends AppCompatActivity {
-    private static final String STRING_EMPTY = "";
-    private static final String KEY_SUCCESS = "success";
-    private static final String KEY_PERSON_ID = "uid";
-    private  static  final  String KEY_PSEUDO ="pseudo";
-    private static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
-    int success;
-    private Button updatePerson;
-    private  Button ok;
-    private  EditText pseudo;
+    private Button updatePerson, ok, cancel,delete,viewAllBtn, addNewBtn;
+    private EditText pseudo;
     private String personId;
-    private Button cancel;
+    private int success;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_home);
-        personId = getIntent().getStringExtra(KEY_PERSON_ID);
-        Button viewAllBtn = (Button) findViewById(R.id.viewAllBtn);
-        Button addNewBtn = (Button) findViewById(R.id.addNewBtn);
-        updatePerson = (Button) findViewById(R.id.updateperson);
+        personId = getIntent().getStringExtra(MainActivity.KEY_PERSON_ID);
+        viewAllBtn = findViewById(R.id.viewAllBtn);
+        addNewBtn =findViewById(R.id.addNewBtn);
+        updatePerson = findViewById(R.id.updateperson);
         pseudo =findViewById(R.id.textView3);
         ok = findViewById(R.id.ok);
         cancel = findViewById(R.id.button2);
         cancel.setVisibility(View.INVISIBLE);
-        final Button delete = findViewById(R.id.button7);
+        delete = findViewById(R.id.button7);
         ok.setVisibility(View.INVISIBLE);
         pseudo.setVisibility(View.INVISIBLE);
         viewAllBtn.setOnClickListener(new View.OnClickListener() {
@@ -48,8 +42,7 @@ public class AccountHomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())){
                     Intent intent = new Intent(getApplicationContext(),AccountListingActivity.class);
-                    intent.putExtra(KEY_PERSON_ID,personId);
-                    System.out.println("ACCOUNTHOMEACTIVITY PERSON ID ------------------"+personId);
+                    intent.putExtra(MainActivity.KEY_PERSON_ID,personId);
                     startActivity(intent);
                 }else{
                     Toast.makeText(AccountHomeActivity.this,"Unable to connect to internet",Toast.LENGTH_LONG).show();
@@ -61,7 +54,7 @@ public class AccountHomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())){
                     Intent intent = new Intent(getApplicationContext(),AddAccountActivity.class);
-                    intent.putExtra(KEY_PERSON_ID,personId);
+                    intent.putExtra(MainActivity.KEY_PERSON_ID,personId);
                     startActivity(intent);
                 }else{
                     Toast.makeText(AccountHomeActivity.this,"Unable to connect to internet",Toast.LENGTH_LONG).show();
@@ -133,10 +126,10 @@ public class AccountHomeActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             HttpJsonParser httpJsonParser = new HttpJsonParser();
             Map<String, String> httpParams = new HashMap<>();
-            httpParams.put(KEY_PERSON_ID, personId);
-            JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "delete_user.php", "POST", httpParams);
+            httpParams.put(MainActivity.KEY_PERSON_ID, personId);
+            JSONObject jsonObject = httpJsonParser.makeHttpRequest(MainActivity.BASE_URL + "delete_user.php", "POST", httpParams);
             try {
-                success = jsonObject.getInt(KEY_SUCCESS);
+                success = jsonObject.getInt(MainActivity.KEY_SUCCESS);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -161,7 +154,7 @@ public class AccountHomeActivity extends AppCompatActivity {
         }
     }
     private void updatePseudo(){
-        if(!STRING_EMPTY.equals(pseudo.getText().toString())) {
+        if(!pseudo.getText().toString().isEmpty()) {
             new AccountHomeActivity.UpdatePersonAsynTask().execute();
         }else{
             Toast.makeText(AccountHomeActivity.this,
@@ -174,11 +167,11 @@ public class AccountHomeActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             HttpJsonParser httpJsonParser = new HttpJsonParser();
             Map<String, String> httpParams = new HashMap<>();
-            httpParams.put(KEY_PERSON_ID,personId);
-            httpParams.put(KEY_PSEUDO,pseudo.getText().toString());
-            JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "update_user.php", "POST", httpParams);
+            httpParams.put(MainActivity.KEY_PERSON_ID,personId);
+            httpParams.put(MainActivity.KEY_PSEUDO,pseudo.getText().toString());
+            JSONObject jsonObject = httpJsonParser.makeHttpRequest(MainActivity.BASE_URL + "update_user.php", "POST", httpParams);
             try {
-                success = jsonObject.getInt(KEY_SUCCESS);
+                success = jsonObject.getInt(MainActivity.KEY_SUCCESS);
             }catch (JSONException e) {
                 e.printStackTrace();
             }
