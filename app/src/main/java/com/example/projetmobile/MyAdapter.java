@@ -42,7 +42,7 @@ class MyAdapter extends RecyclerView.Adapter<ViewH>{
         somme.setText(data.get(position).get("somme"));
         TextView detail =holder.v.findViewById(R.id.detail);
         detail.setText(data.get(position).get("detail"));
-        final Button b = holder.v.findViewById(R.id.button);
+        final Button b = holder.v.findViewById(R.id.userlogin);
         TextView statut =holder.v.findViewById(R.id.paid);
         if(from == data.get(position).get("idto")){
             b.setVisibility(View.INVISIBLE);

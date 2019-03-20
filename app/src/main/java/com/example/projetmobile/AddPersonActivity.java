@@ -30,8 +30,8 @@ public class AddPersonActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_person);
-        pseudoPerson =findViewById(R.id.textView2555);
+        //setContentView(R.layout.activity_add_person);
+       // pseudoPerson =findViewById(R.id.textView2555);
         add =findViewById(R.id.add);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
