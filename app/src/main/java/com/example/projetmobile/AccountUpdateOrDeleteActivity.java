@@ -383,7 +383,9 @@ public class AccountUpdateOrDeleteActivity extends AppCompatActivity {
                     if (success == 1) {
                         //Display success message
                         Toast.makeText(AccountUpdateOrDeleteActivity.this, userpseudo+" has been added", Toast.LENGTH_LONG).show();
-                    } else {
+                    } else if(success ==2) {
+                        Toast.makeText(AccountUpdateOrDeleteActivity.this, userpseudo+" is already add into this account", Toast.LENGTH_LONG).show();
+                    }else{
                         Toast.makeText(AccountUpdateOrDeleteActivity.this, "Some error occurred while deleting person", Toast.LENGTH_LONG).show();
                     }
                 }

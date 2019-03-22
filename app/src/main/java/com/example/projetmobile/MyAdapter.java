@@ -42,25 +42,25 @@ class MyAdapter extends RecyclerView.Adapter<ViewH>{
         somme.setText(data.get(position).get("somme"));
         TextView detail =holder.v.findViewById(R.id.detail);
         detail.setText(data.get(position).get("detail"));
-        final Button b = holder.v.findViewById(R.id.userlogin);
-        TextView statut =holder.v.findViewById(R.id.paid);
-        if(from == data.get(position).get("idto")){
+        final Button b = holder.v.findViewById(R.id.button);
+        final TextView statut =holder.v.findViewById(R.id.paid);
+        if(data.get(position).get("idto").equals(from)){
             b.setVisibility(View.INVISIBLE);
-            statut.setText(data.get(position).get("statut"));
         }else{
             if(data.get(position).get("statut").equals("paid")) {
                 b.setVisibility(View.INVISIBLE);
-                statut.setText("paid");
+                statut.setText("you have "+data.get(position).get("statut"));
             }else{
                 b.setText(data.get(position).get("statut"));
                 b.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         b.setVisibility(View.INVISIBLE);
+                        statut.setText("you have pad");
                         HttpJsonParser httpJsonParser = new HttpJsonParser();
                         Map<String, String> httpParams = new HashMap<>();
                         httpParams.put("did",data.get(p).get("did"));
-                        JSONObject jsonObject = httpJsonParser.makeHttpRequest("https://pw.lacl.fr/~u21505006/ProjetAndroid/update_depense.php", "POST", httpParams);
+                        JSONObject jsonObject = httpJsonParser.makeHttpRequest(MainActivity.BASE_URL+"update_depense.php", "POST", httpParams);
                         try {
                             int success = jsonObject.getInt("success");
                         }catch (JSONException e) {

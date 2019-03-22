@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -11,10 +12,10 @@
         android:layout_height="82dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/userlogin"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="36dp"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toStartOf="@+id/paid"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -45,14 +46,14 @@
 
     <TextView
         android:id="@+id/paid"
-        android:layout_width="151dp"
-        android:layout_height="88dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="213dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="188dp"
+        android:layout_marginTop="16dp"
         android:text="         Paid"
         android:textColor="@color/colorAccent"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/userlogin"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
