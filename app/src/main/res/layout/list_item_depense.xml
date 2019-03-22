@@ -51,7 +51,7 @@
         android:layout_marginStart="188dp"
         android:layout_marginTop="16dp"
         android:text="         Paid"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/darkdarkgreen"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
