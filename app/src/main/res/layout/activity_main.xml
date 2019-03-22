@@ -41,7 +41,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:text="Welcome to count !"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/darkdarkgreen"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/Information"
         app:layout_constraintEnd_toEndOf="parent"
