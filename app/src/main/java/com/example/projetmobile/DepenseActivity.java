@@ -22,12 +22,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DepenseActivity extends AppCompatActivity {
-    private static final String STRING_EMPTY = "";
-    private static final String KEY_SUCCESS = "success";
-    private static final String KEY_DATA = "data";
-    private static final String KEY_ACCOUNT_ID = "aid";
-    private static final String KEY_PSEUDO ="pseudo";
-    private static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
     private int success;
     private String personfrom,pseudoto,personto, accountId,sommestr,detailstr;
     private TextView pseudo;
@@ -46,8 +40,8 @@ public class DepenseActivity extends AppCompatActivity {
         depenseListView = findViewById(R.id.recyclerView);
         pseudo=findViewById(R.id.pseudo);
         personfrom= intent.getStringExtra("idfrom");
-        accountId=intent.getStringExtra(KEY_ACCOUNT_ID);
-        pseudoto=intent.getStringExtra(KEY_PSEUDO);
+        accountId=intent.getStringExtra(MainActivity.KEY_ACCOUNT_ID);
+        pseudoto=intent.getStringExtra(MainActivity.KEY_PSEUDO);
         personto =intent.getStringExtra("idto");
         pseudo.setText(pseudoto);
         somme =findViewById(R.id.somme);
@@ -76,16 +70,16 @@ public class DepenseActivity extends AppCompatActivity {
             httpParams.put("idto",personto);
             httpParams.put("idfrom",personfrom);
             JSONObject jsonObject = httpJsonParser.makeHttpRequest(
-                    BASE_URL + "select_all_depense_user.php", "GET",httpParams);
+                    MainActivity.BASE_URL + "select_all_depense_user.php", "GET",httpParams);
             if (jsonObject == null) {
                 System.out.println("JSON NULL");
             }
             try {
-                int success = jsonObject.getInt(KEY_SUCCESS);
+                int success = jsonObject.getInt(MainActivity.KEY_SUCCESS);
                 JSONArray depense;
                 if (success == 1) {
                     depenseList = new ArrayList<>();
-                    depense= jsonObject.getJSONArray(KEY_DATA);
+                    depense= jsonObject.getJSONArray(MainActivity.KEY_DATA);
                     for (int i = 0; i < depense.length(); i++) {
                         JSONObject depenses  = depense.getJSONObject(i);
                         String did = depenses.getString("did");
@@ -154,10 +148,10 @@ public class DepenseActivity extends AppCompatActivity {
             HttpJsonParser httpJsonParser = new HttpJsonParser();
             Map<String, String> httpParams = new HashMap<>();
             httpParams.put("idto", personto);
-            httpParams.put(KEY_ACCOUNT_ID,accountId);
-            JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "delete_person_participate.php", "POST", httpParams);
+            httpParams.put(MainActivity.KEY_ACCOUNT_ID,accountId);
+            JSONObject jsonObject = httpJsonParser.makeHttpRequest(MainActivity.BASE_URL + "delete_person_participate.php", "POST", httpParams);
             try {
-                success = jsonObject.getInt(KEY_SUCCESS);
+                success = jsonObject.getInt(MainActivity.KEY_SUCCESS);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -183,7 +177,7 @@ public class DepenseActivity extends AppCompatActivity {
     }
 
     private void confirmAdd() {
-        if (!STRING_EMPTY.equals(somme.getText().toString()) &&!STRING_EMPTY.equals(detail.getText().toString())) {
+        if (!somme.getText().toString().isEmpty() &&!detail.getText().toString().isEmpty()) {
             sommestr=somme.getText().toString();
             detailstr = detail.getText().toString();
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DepenseActivity.this);
@@ -217,14 +211,14 @@ public class DepenseActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             HttpJsonParser httpJsonParser = new HttpJsonParser();
             Map<String, String> httpParams = new HashMap<>();
-            httpParams.put(KEY_ACCOUNT_ID,accountId);
+            httpParams.put(MainActivity.KEY_ACCOUNT_ID,accountId);
             httpParams.put("idfrom", personfrom);
             httpParams.put("idto", personto);
             httpParams.put("somme",sommestr);
             httpParams.put("detail",detailstr);
-            JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "add_depense.php", "POST", httpParams);
+            JSONObject jsonObject = httpJsonParser.makeHttpRequest(MainActivity.BASE_URL + "add_depense.php", "POST", httpParams);
             try {
-                success = jsonObject.getInt(KEY_SUCCESS);
+                success = jsonObject.getInt(MainActivity.KEY_SUCCESS);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
