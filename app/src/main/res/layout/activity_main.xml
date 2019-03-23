@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/darkgreen"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/Information"
         android:layout_width="174dp"
         android:layout_height="86dp"
+        android:background="@color/darkgreen"
         android:text="Go"
         android:textColor="@color/darkdarkgreen"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,12 +22,11 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="639dp"
-        android:layout_height="387dp"
+        android:layout_height="266dp"
         android:adjustViewBounds="true"
         android:cropToPadding="false"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_main" />
@@ -37,7 +36,7 @@
         android:layout_width="275dp"
         android:layout_height="47dp"
         android:text="Welcome to Count!"
-        android:textColor="@color/white"
+        android:textColor="@color/darkdarkgreen"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/textView6"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +49,7 @@
         android:layout_width="335dp"
         android:layout_height="116dp"
         android:text="The solution for organizing group expenses on mobile. Perfect for trips, holidays, meals or sharing flat expenses with friends or family."
-        android:textColor="@color/white"
+        android:textColor="@color/darkdarkgreen"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/Information"
         app:layout_constraintEnd_toEndOf="parent"
