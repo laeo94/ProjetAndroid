@@ -4,48 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/darkgreen"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/Information"
-        android:layout_width="123dp"
-        android:layout_height="71dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@color/darkdarkgreen"
+        android:layout_width="174dp"
+        android:layout_height="86dp"
         android:text="Go"
-        android:textColor="@android:color/white"
+        android:textColor="@color/darkdarkgreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="335dp"
-        android:layout_height="351dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="247dp"
+        android:layout_height="222dp"
         android:adjustViewBounds="true"
         android:cropToPadding="false"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/img0" />
+        app:srcCompat="@drawable/logo_main" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="253dp"
-        android:layout_height="66dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="Welcome to count !"
-        android:textColor="@color/darkdarkgreen"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/Information"
+        android:layout_width="275dp"
+        android:layout_height="47dp"
+        android:text="Welcome to Count!"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView6"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="335dp"
+        android:layout_height="116dp"
+        android:text="The solution for organizing group expenses on mobile. Perfect for trips, holidays, meals or sharing flat expenses with friends or family."
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/Information"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 </android.support.constraint.ConstraintLayout>

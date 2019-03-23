@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
  import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,6 +21,7 @@ public class AccountHomeActivity extends AppCompatActivity {
     private Button updatePerson, ok, cancel,delete,viewAllBtn, addNewBtn;
     private EditText pseudo;
     private String personId;
+    private ImageView modify;
     private int success;
 
     @Override
@@ -37,6 +39,7 @@ public class AccountHomeActivity extends AppCompatActivity {
         delete = findViewById(R.id.button7);
         ok.setVisibility(View.INVISIBLE);
         pseudo.setVisibility(View.INVISIBLE);
+        modify =findViewById(R.id.imageView8);
         viewAllBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +69,7 @@ public class AccountHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updatePerson.setVisibility(View.INVISIBLE);
+                modify.setVisibility(View.INVISIBLE);
                 pseudo.setVisibility(View.VISIBLE);
                 ok.setVisibility(View.VISIBLE);
                 cancel.setVisibility(View.VISIBLE);
@@ -76,6 +80,7 @@ public class AccountHomeActivity extends AppCompatActivity {
                         pseudo.setVisibility(View.INVISIBLE);
                         ok.setVisibility(View.INVISIBLE);
                         cancel.setVisibility(View.INVISIBLE);
+                        modify.setVisibility(View.VISIBLE);
                     }
                 });
                 ok.setOnClickListener(new View.OnClickListener() {
@@ -186,6 +191,7 @@ public class AccountHomeActivity extends AppCompatActivity {
                         pseudo.setVisibility(View.INVISIBLE);
                         updatePerson.setVisibility(View.VISIBLE);
                         cancel.setVisibility(View.INVISIBLE);
+                        modify.setVisibility(View.VISIBLE);
                     }else if(success == 2){
                         Toast.makeText(AccountHomeActivity.this, "Pseudo already taken please choose a nother", Toast.LENGTH_LONG).show();
 

@@ -11,69 +11,90 @@
         android:id="@+id/txtuser"
         android:layout_width="269dp"
         android:layout_height="39dp"
-        android:layout_marginBottom="8dp"
         android:layout_weight="0.75"
         android:background="@color/white"
         android:ems="10"
-        android:hint="Login"
+        android:hint="                        Login"
         app:layout_constraintBottom_toTopOf="@+id/txtmdp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.471"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <EditText
         android:id="@+id/txtmdp"
         android:layout_width="271dp"
         android:layout_height="41dp"
-        android:layout_marginBottom="48dp"
         android:layout_weight="1"
         android:background="@color/white"
         android:ems="10"
-        android:hint="Password"
+        android:hint="                     Password"
         android:inputType="textMultiLine|textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/userlogin"
+        app:layout_constraintBottom_toTopOf="@+id/btnAdd"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.458"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/txtuser" />
 
     <Button
         android:id="@+id/userlogin"
-        android:layout_width="287dp"
-        android:layout_height="43dp"
-        android:layout_marginBottom="20dp"
+        android:layout_width="138dp"
+        android:layout_height="35dp"
         android:background="@color/darkdarkgreen"
         android:text="Login"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/btnAdd"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnAdd"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtmdp" />
 
     <Button
         android:id="@+id/btnAdd"
-        android:layout_width="289dp"
-        android:layout_height="46dp"
-        android:layout_marginBottom="76dp"
+        android:layout_width="125dp"
+        android:layout_height="37dp"
         android:background="@color/darkdarkgreen"
-        android:textColor="@color/white"
         android:text="Register"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/userlogin"
+        app:layout_constraintTop_toBottomOf="@+id/txtmdp" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="260dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="40dp"
-        android:text="Join the Adventure"
+        android:layout_width="302dp"
+        android:layout_height="63dp"
+        android:text="Join the Adventure !"
         android:textColor="@color/white"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtuser"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.866" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="48dp"
+        android:layout_height="66dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView3"
+        app:layout_constraintEnd_toStartOf="@+id/txtuser"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:srcCompat="@drawable/logo_user" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="65dp"
+        android:layout_height="59dp"
+        app:layout_constraintBottom_toTopOf="@+id/userlogin"
+        app:layout_constraintEnd_toStartOf="@+id/txtmdp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:srcCompat="@drawable/logo_password" />
 </android.support.constraint.ConstraintLayout>
 

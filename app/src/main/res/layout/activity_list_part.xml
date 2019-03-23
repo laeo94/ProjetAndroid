@@ -4,31 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#eee"
     tools:context=".ListParticipateActivity">
 
     <TextView
         android:id="@+id/textView1"
-        android:layout_width="393dp"
-        android:layout_height="66dp"
-        android:text="           Person participate "
+        android:layout_width="158dp"
+        android:layout_height="106dp"
+        android:text="  Person    participate "
+        android:textColor="@color/darkdarkgreen"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/personList"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView13"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.584" />
 
     <ListView
         android:id="@+id/personList"
         android:layout_width="326dp"
-        android:layout_height="163dp"
-        android:divider="@android:color/transparent"
+        android:layout_height="204dp"
+        android:cacheColorHint="@color/white"
+        android:divider="@color/bluedark"
         android:dividerHeight="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/Information"
+        app:layout_constraintBottom_toTopOf="@+id/imageView12"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView1">
+        app:layout_constraintTop_toBottomOf="@+id/imageView13">
 
     </ListView>
 
@@ -36,11 +40,44 @@
         android:id="@+id/Information"
         android:layout_width="195dp"
         android:layout_height="58dp"
-        android:text="Information account"
+        android:text="Information/Modif  account"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView12"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageView11"
+        app:layout_constraintTop_toBottomOf="@+id/personList" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="105dp"
+        android:layout_height="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Information"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/personList"
+        app:srcCompat="@drawable/info" />
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="104dp"
+        android:layout_height="79dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personList" />
+        app:layout_constraintStart_toEndOf="@+id/Information"
+        app:layout_constraintTop_toBottomOf="@+id/personList"
+        app:srcCompat="@drawable/modify" />
+
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="204dp"
+        android:layout_height="121dp"
+        app:layout_constraintBottom_toTopOf="@+id/personList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/list" />
 
 </android.support.constraint.ConstraintLayout>

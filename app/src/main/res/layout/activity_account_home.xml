@@ -16,14 +16,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
         tools:context=".AccountHomeActivity">
 
         <Button
             android:id="@+id/viewAllBtn"
             android:layout_width="match_parent"
             android:layout_height="75dp"
-            android:background="@color/darkdarkgreen"
+            android:background="@color/bluedark"
             android:text="@string/view_all"
             android:textColor="@android:color/white" />
 
@@ -31,20 +31,21 @@
             android:id="@+id/addNewBtn"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:background="@color/darkdarkgreen"
+            android:background="@color/darkgreen"
             android:text="@string/add_new"
             android:textColor="@android:color/white" />
     </LinearLayout>
 
     <Button
         android:id="@+id/updateperson"
-        android:layout_width="133dp"
-        android:layout_height="60dp"
-        android:background="@color/darkdarkgreen"
-        android:backgroundTint="@color/darkdarkgreen"
-        android:text="Update"
+        android:layout_width="113dp"
+        android:layout_height="50dp"
+        android:background="@color/darkgreen"
+        android:backgroundTint="@color/darkgreen"
+        android:text="Update user"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView8"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button7"
         app:layout_constraintTop_toBottomOf="@+id/button2" />
@@ -55,8 +56,9 @@
         android:layout_height="42dp"
         android:contentDescription="New Pseudo"
         android:hint="New Pseudo"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/ok"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity_home2" />
 
@@ -64,9 +66,10 @@
         android:id="@+id/ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/darkdarkgreen"
+        android:background="@color/bluedark"
         android:text="ok"
-        app:layout_constraintBottom_toTopOf="@+id/button7"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/imageView5"
         app:layout_constraintEnd_toStartOf="@+id/button2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,25 +77,62 @@
 
     <Button
         android:id="@+id/button7"
-        android:layout_width="105dp"
-        android:layout_height="67dp"
-        android:background="@color/darkdarkgreen"
-        android:text="Delete"
+        android:layout_width="106dp"
+        android:layout_height="51dp"
+        android:background="@color/bluedark"
+        android:text="Delete user"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/updateperson"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView5"
         app:layout_constraintTop_toBottomOf="@+id/ok" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/darkdarkgreen"
+        android:background="@color/darkgreen"
         android:text="CANCEL"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/updateperson"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/ok"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="176dp"
+        android:layout_height="41dp"
+        android:text="Main Page"
+        android:textColor="@color/darkdarkgreen"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/activity_home2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="79dp"
+        android:layout_height="45dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button7"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ok"
+        app:srcCompat="@drawable/delete" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="87dp"
+        android:layout_height="52dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/updateperson"
+        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:srcCompat="@drawable/modify" />
 </android.support.constraint.ConstraintLayout>
