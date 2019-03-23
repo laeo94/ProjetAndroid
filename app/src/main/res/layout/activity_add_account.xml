@@ -4,20 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#eee"
     tools:context=".AddAccountActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/textView10">
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -102,11 +101,37 @@
                 android:layout_width="wrap_content"
                 android:layout_height="83dp"
                 android:layout_weight="0.20"
-                android:background="@color/darkdarkgreen"
-                android:text="@string/add" />
+                android:background="@color/bluedark"
+                android:text="@string/add"
+                android:textColor="@color/white" />
 
         </LinearLayout>
 
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="234dp"
+        android:layout_height="78dp"
+        android:text="Add new account :"
+        android:textColor="@color/darkdarkgreen"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toStartOf="@+id/imageView15"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView15"
+        android:layout_width="115dp"
+        android:layout_height="76dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView10"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.445"
+        app:srcCompat="@drawable/add" />
 </android.support.constraint.ConstraintLayout>

@@ -9,9 +9,9 @@
 
     <TextView
         android:id="@+id/textView1"
-        android:layout_width="158dp"
-        android:layout_height="106dp"
-        android:text="  Person    participate "
+        android:layout_width="174dp"
+        android:layout_height="123dp"
+        android:text="  Other person  participation"
         android:textColor="@color/darkdarkgreen"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/personList"
@@ -23,8 +23,8 @@
 
     <ListView
         android:id="@+id/personList"
-        android:layout_width="326dp"
-        android:layout_height="204dp"
+        android:layout_width="346dp"
+        android:layout_height="239dp"
         android:cacheColorHint="@color/white"
         android:divider="@color/bluedark"
         android:dividerHeight="5dp"
