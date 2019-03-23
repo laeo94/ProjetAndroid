@@ -22,12 +22,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ListParticipateActivity extends AppCompatActivity {
-    private static final String KEY_SUCCESS = "success";
-    private static final String KEY_DATA = "data";
-    private static final String KEY_ACCOUNT_ID = "aid";
-    private static final String KEY_PERSON_ID = "uid";
-    private static final String KEY_PSEUDO = "pseudo";
-    private static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
     private ArrayList<HashMap<String, String>> personList;
     private ListView personListView;
     private String accountId, personfrom;
@@ -37,8 +31,8 @@ public class ListParticipateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_part);
         personListView = findViewById(R.id.personList);
         Intent intent = getIntent();
-        accountId = intent.getStringExtra(KEY_ACCOUNT_ID);
-        personfrom =intent.getStringExtra(KEY_PERSON_ID);
+        accountId = intent.getStringExtra(MainActivity.KEY_ACCOUNT_ID);
+        personfrom =intent.getStringExtra(MainActivity.KEY_PERSON_ID);
         Button info;
         info = findViewById(R.id.Information);
         info.setOnClickListener(new View.OnClickListener() {
@@ -48,7 +42,7 @@ public class ListParticipateActivity extends AppCompatActivity {
                 if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
                     Intent i = new Intent(getApplicationContext(),
                             AccountUpdateOrDeleteActivity.class);
-                    i.putExtra(KEY_ACCOUNT_ID,accountId);
+                    i.putExtra(MainActivity.KEY_ACCOUNT_ID,accountId);
                     startActivity(i);
                 } else {
                     //Display error message if not connected to internet
@@ -68,26 +62,26 @@ public class ListParticipateActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             HttpJsonParser httpJsonParser = new HttpJsonParser();
             Map<String, String> httpParams = new HashMap<>();
-            httpParams.put(KEY_ACCOUNT_ID, accountId);
-            httpParams.put(KEY_PERSON_ID, personfrom);
+            httpParams.put(MainActivity.KEY_ACCOUNT_ID, accountId);
+            httpParams.put(MainActivity.KEY_PERSON_ID, personfrom);
             JSONObject jsonObject = httpJsonParser.makeHttpRequest(
-                    BASE_URL + "select_all_person_participate.php", "GET", httpParams);
+                    MainActivity.BASE_URL + "select_all_person_participate.php", "GET", httpParams);
             if (jsonObject == null) {
                 System.out.println("JSON NULL");
             }
             try {
-                int success = jsonObject.getInt(KEY_SUCCESS);
+                int success = jsonObject.getInt(MainActivity.KEY_SUCCESS);
                 JSONArray person;
                 if (success == 1) {
                     personList = new ArrayList<>();
-                    person= jsonObject.getJSONArray(KEY_DATA);
+                    person= jsonObject.getJSONArray(MainActivity.KEY_DATA);
                     for (int i = 0; i < person.length(); i++) {
                         JSONObject accounts  = person.getJSONObject(i);
-                        String  pseudo = accounts.getString(KEY_PSEUDO);
-                        String uid = accounts.getString(KEY_PERSON_ID );
+                        String  pseudo = accounts.getString(MainActivity.KEY_PSEUDO);
+                        String uid = accounts.getString(MainActivity.KEY_PERSON_ID );
                         HashMap<String, String> map = new HashMap<String, String>();
-                        map.put(KEY_PERSON_ID, uid);
-                        map.put(KEY_PSEUDO,pseudo);
+                        map.put(MainActivity.KEY_PERSON_ID, uid);
+                        map.put(MainActivity.KEY_PSEUDO,pseudo);
                         personList.add(map);
                     }
                 }
@@ -110,8 +104,8 @@ public class ListParticipateActivity extends AppCompatActivity {
     private void populatePersonList() {
         final ListAdapter adapter = new SimpleAdapter(
                 ListParticipateActivity.this, personList,
-                R.layout.list_item, new String[]{KEY_PERSON_ID,
-                KEY_PSEUDO},
+                R.layout.list_item, new String[]{MainActivity.KEY_PERSON_ID,
+                MainActivity.KEY_PSEUDO},
                 new int[]{R.id.textView, R.id.textView1});
 
         // updating listview
@@ -127,8 +121,8 @@ public class ListParticipateActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(),DepenseActivity.class);
                     intent.putExtra("idto",personto);
                     intent.putExtra("idfrom",personfrom);
-                    intent.putExtra(KEY_PSEUDO,pseudo);
-                    intent.putExtra(KEY_ACCOUNT_ID, accountId);
+                    intent.putExtra(MainActivity.KEY_PSEUDO,pseudo);
+                    intent.putExtra(MainActivity.KEY_ACCOUNT_ID, accountId);
                     startActivityForResult(intent, 20);
                     finish();
                 } else {

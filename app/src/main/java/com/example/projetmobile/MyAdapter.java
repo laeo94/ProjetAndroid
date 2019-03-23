@@ -56,7 +56,7 @@ class MyAdapter extends RecyclerView.Adapter<ViewH>{
                     @Override
                     public void onClick(View v) {
                         b.setVisibility(View.INVISIBLE);
-                        statut.setText("you have pad");
+                        statut.setText("you have paid");
                         HttpJsonParser httpJsonParser = new HttpJsonParser();
                         Map<String, String> httpParams = new HashMap<>();
                         httpParams.put("did",data.get(p).get("did"));

@@ -17,8 +17,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AddUserActivity extends AppCompatActivity {
-    private static final String KEY_SUCCESS = "success", KEY_PSEUDO ="pseudo",KEY_MDP = "mdp",STRING_EMPTY = "";
-    private static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
     private String pseudo, mdp;
     private EditText pseudoUser, mdpUser, mdp2User;
     private Button add;
@@ -48,7 +46,7 @@ public class AddUserActivity extends AppCompatActivity {
     }
 
     private void addUser(){
-        if (!STRING_EMPTY.equals(pseudoUser.getText().toString()) &&!STRING_EMPTY.equals(mdpUser.getText().toString())&&!STRING_EMPTY.equals(mdp2User.getText().toString())) {
+        if (!pseudoUser.getText().toString().isEmpty() &&!mdpUser.getText().toString().isEmpty() &&!mdp2User.getText().toString().isEmpty()) {
             if(mdpUser.getText().toString().equals(mdp2User.getText().toString())) {
                 pseudo = pseudoUser.getText().toString();
                 mdp = mdpUser.getText().toString();
@@ -79,12 +77,11 @@ public class AddUserActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             HttpJsonParser httpJsonParser = new HttpJsonParser();
             Map<String, String> httpParams = new HashMap<>();
-            httpParams.put(KEY_PSEUDO, pseudo);
-            httpParams.put(KEY_MDP,mdp);
-            System.out.println("ppppppppppppppppppppppppppppppppppppppppppppppppppppppp "+pseudo+ "    "+mdp);
-            JSONObject jsonObject = httpJsonParser.makeHttpRequest(BASE_URL + "add_user.php", "POST", httpParams);
+            httpParams.put(MainActivity.KEY_PSEUDO, pseudo);
+            httpParams.put(MainActivity.KEY_MDP,mdp);
+            JSONObject jsonObject = httpJsonParser.makeHttpRequest(MainActivity.BASE_URL + "add_user.php", "POST", httpParams);
             try {
-                success = jsonObject.getInt(KEY_SUCCESS);
+                success = jsonObject.getInt(MainActivity.KEY_SUCCESS);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

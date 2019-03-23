@@ -42,7 +42,7 @@
         android:layout_height="58dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@color/bluedark"
+        android:background="@color/darkdarkgreen"
         android:text="Information"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"

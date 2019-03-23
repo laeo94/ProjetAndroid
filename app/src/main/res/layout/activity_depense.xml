@@ -7,43 +7,29 @@
 
     tools:context="com.example.projetmobile.DepenseActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="395dp"
-        android:layout_height="65dp"
+
+    <TextView
+        android:id="@+id/pseudo"
+        android:layout_width="236dp"
+        android:layout_height="79dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="607dp"
+        android:layout_weight="1"
+        android:textSize="36sp" />
+
+    <Button
+        android:id="@+id/supp"
+        android:layout_width="100dp"
+        android:layout_height="63dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="599dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_marginTop="595dp"
+        android:layout_marginEnd="68dp"
+        android:layout_weight="1"
+        android:background="@drawable/delete" />
 
-        <TextView
-            android:id="@+id/pseudo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="24sp" />
-
-        <Button
-            android:id="@+id/supp"
-            android:layout_height="match_parent"
-            android:layout_alignEnd="@+id/linearLayout2"
-            android:layout_weight="1"
-            android:text="Delete" />
-
-        <ImageView
-            android:id="@+id/imageView16"
-            android:layout_width="10dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/delete" />
-    </LinearLayout>
 
     <TextView
         android:id="@+id/textView11"
@@ -51,8 +37,8 @@
         android:layout_height="85dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="88dp"
         android:text="Add Expense"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/add"
@@ -67,9 +53,9 @@
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="51dp"
         android:layout_toEndOf="@+id/textView11"
         android:hint="sum"
         android:inputType="number"
@@ -81,13 +67,13 @@
 
     <Button
         android:id="@+id/add"
-        android:layout_width="wrap_content"
-        android:layout_height="34dp"
+        android:layout_width="75dp"
+        android:layout_height="47dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="108dp"
-        android:layout_marginEnd="167dp"
-        android:text="Add"
+        android:layout_marginTop="165dp"
+        android:layout_marginEnd="101dp"
+        android:background="@drawable/add"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -100,8 +86,8 @@
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="55dp"
-        android:layout_marginEnd="33dp"
+        android:layout_marginTop="106dp"
+        android:layout_marginEnd="17dp"
         android:hint="details" />
 
     <android.support.v7.widget.RecyclerView
@@ -112,9 +98,20 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="94dp"
         android:layout_marginEnd="46dp"
         tools:listitem="@layout/list_item_depense" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="253dp"
+        android:layout_height="37dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="243dp"
+        android:layout_marginEnd="55dp"
+        android:text="List depense with :"
+        android:textSize="18sp" />
 
 </RelativeLayout>
 
