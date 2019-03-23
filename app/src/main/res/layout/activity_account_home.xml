@@ -38,14 +38,13 @@
 
     <Button
         android:id="@+id/updateperson"
-        android:layout_width="113dp"
-        android:layout_height="50dp"
-        android:background="@color/darkgreen"
+        android:layout_width="92dp"
+        android:layout_height="62dp"
+        android:background="@drawable/modify"
         android:backgroundTint="@color/darkgreen"
-        android:text="Update user"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView8"
+        app:layout_constraintBottom_toTopOf="@+id/textView12"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button7"
         app:layout_constraintTop_toBottomOf="@+id/button2" />
@@ -56,7 +55,7 @@
         android:layout_height="42dp"
         android:contentDescription="New Pseudo"
         android:hint="New Pseudo"
-        app:layout_constraintBottom_toTopOf="@+id/ok"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,7 +68,7 @@
         android:background="@color/bluedark"
         android:text="ok"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/imageView5"
+        app:layout_constraintBottom_toTopOf="@+id/button7"
         app:layout_constraintEnd_toStartOf="@+id/button2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,15 +76,14 @@
 
     <Button
         android:id="@+id/button7"
-        android:layout_width="106dp"
+        android:layout_width="86dp"
         android:layout_height="51dp"
-        android:background="@color/bluedark"
-        android:text="Delete user"
+        android:background="@drawable/delete"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView9"
         app:layout_constraintEnd_toStartOf="@+id/updateperson"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ok" />
 
     <Button
@@ -114,25 +112,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="79dp"
-        android:layout_height="45dp"
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete user"
+        android:textColor="@android:color/holo_red_dark"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button7"
+        app:layout_constraintEnd_toStartOf="@+id/textView12"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ok"
-        app:srcCompat="@drawable/delete" />
+        app:layout_constraintTop_toBottomOf="@+id/button7" />
 
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="87dp"
-        android:layout_height="52dp"
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Modify user"
+        android:textColor="@color/darkdarkgreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/updateperson"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
-        app:srcCompat="@drawable/modify" />
+        app:layout_constraintStart_toEndOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/updateperson" />
+
 </android.support.constraint.ConstraintLayout>

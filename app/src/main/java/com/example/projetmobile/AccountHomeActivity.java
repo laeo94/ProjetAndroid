@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
  import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,7 +22,7 @@ public class AccountHomeActivity extends AppCompatActivity {
     private Button updatePerson, ok, cancel,delete,viewAllBtn, addNewBtn;
     private EditText pseudo;
     private String personId;
-    private ImageView modify;
+    private TextView modify;
     private int success;
 
     @Override
@@ -39,7 +40,6 @@ public class AccountHomeActivity extends AppCompatActivity {
         delete = findViewById(R.id.button7);
         ok.setVisibility(View.INVISIBLE);
         pseudo.setVisibility(View.INVISIBLE);
-        modify =findViewById(R.id.imageView8);
         viewAllBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

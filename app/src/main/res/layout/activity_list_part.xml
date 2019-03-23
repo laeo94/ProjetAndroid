@@ -9,9 +9,9 @@
 
     <TextView
         android:id="@+id/textView1"
-        android:layout_width="174dp"
-        android:layout_height="123dp"
-        android:text="  Other person  participation"
+        android:layout_width="247dp"
+        android:layout_height="99dp"
+        android:text=" Other person  participate"
         android:textColor="@color/darkdarkgreen"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/personList"
@@ -19,7 +19,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.584" />
+        app:layout_constraintVertical_bias="0.6" />
 
     <ListView
         android:id="@+id/personList"
@@ -71,8 +71,8 @@
 
     <ImageView
         android:id="@+id/imageView13"
-        android:layout_width="204dp"
-        android:layout_height="121dp"
+        android:layout_width="139dp"
+        android:layout_height="114dp"
         app:layout_constraintBottom_toTopOf="@+id/personList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
