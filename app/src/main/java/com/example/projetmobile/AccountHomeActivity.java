@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
  import org.json.JSONException;
@@ -40,6 +39,7 @@ public class AccountHomeActivity extends AppCompatActivity {
         delete = findViewById(R.id.button7);
         ok.setVisibility(View.INVISIBLE);
         pseudo.setVisibility(View.INVISIBLE);
+        modify= findViewById(R.id.textView12);
         viewAllBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

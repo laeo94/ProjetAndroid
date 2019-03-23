@@ -188,6 +188,8 @@ public class DepenseActivity extends AppCompatActivity {
                         public void onClick(DialogInterface arg0, int arg1) {
                             if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
                                 new DepenseActivity.AddDepenseAsyncTask().execute();
+                                finish();
+                                startActivity(getIntent());
                             } else {
                                 Toast.makeText(DepenseActivity.this,
                                         "Unable to connect to internet",
