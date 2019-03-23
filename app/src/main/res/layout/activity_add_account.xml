@@ -14,7 +14,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView10">
 
@@ -49,7 +49,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Device (£,€,$)" />
+                android:text="     Device (£,€,$)" />
 
             <EditText
                 android:id="@+id/txtAccountDevAdd"
@@ -71,7 +71,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/accountDesc" />
+                android:text="     Description " />
 
             <EditText
                 android:id="@+id/txtAccountDescAdd"
@@ -114,8 +114,8 @@
         android:id="@+id/textView10"
         android:layout_width="234dp"
         android:layout_height="78dp"
-        android:text="Add new account :"
-        android:textColor="@color/darkdarkgreen"
+        android:text="  Add new account :"
+        android:textColor="@color/bluedark"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toStartOf="@+id/imageView15"

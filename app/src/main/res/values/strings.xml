@@ -4,7 +4,7 @@
     <string name="add_new">Add New Account</string>
     <string name="accountName">Account Name</string>
     <string name="accountTitle">Account Title</string>
-    <string name="accountDesc">Description</string>
+    <string name="accountDesc"> Description</string>
     <string name="accountDevice">Device</string>
     <string name="update">Update</string>
     <string name="delete">Delete</string>
