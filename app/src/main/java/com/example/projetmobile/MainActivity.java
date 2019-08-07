@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String BASE_URL = "https://pw.lacl.fr/~u21505006/ProjetAndroid/";
+    public static final String BASE_URL = "";
     public static final String KEY_SUCCESS = "success";
     public static final String KEY_DATA = "data";
     public static final String KEY_PERSON_ID= "uid";
