@@ -1,8 +1,8 @@
 <?php
 //Attention il gaudrai peut etre change le mot de passe
-define('DB_USER', "u21505006"); // db user
-define('DB_PASSWORD',"434p81IYzTGu"); // db password (mention your db password here)
-define('DB_DATABASE', "u21505006"); // database name
+define('DB_USER', ""); // db user
+define('DB_PASSWORD',""); // db password (mention your db password here)
+define('DB_DATABASE', ""); // database name
 define('DB_SERVER', "localhost"); // db server
  
 $con = mysqli_connect(DB_SERVER,DB_USER,DB_PASSWORD,DB_DATABASE);
